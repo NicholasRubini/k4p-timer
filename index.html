@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#0c0c0e">
+  <title>Kettlebells for Performance</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg: #0c0c0e;
+      --bg-card: #151517;
+      --bg-elevated: #1e1e22;
+      --bg-input: #252528;
+      
+      --text: #f0ede6;
+      --text-secondary: #c5c2ba;
+      --text-dim: #9a978f;
+      --text-muted: #5a5955;
+      
+      --gold: #c9b370;
+      --gold-bright: #e0cc8a;
+      --gold-dim: #a08a50;
+      
+      --forest: #5a7a50;
+      --aurora: #7a6a8a;
+      --steel: #6a7078;
+      --serpent: #5a7365;
+      --thunder: #5a6578;
+      --raven: #6c6255;
+      --blood: #7a5454;
+      
+      --work: #c9b370;
+      --rest: #6a8090;
+      --set-rest: #5a7a50;
+      
+      --font-display: 'Cormorant Garamond', Georgia, serif;
+      --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    * { 
+      margin: 0; 
+      padding: 0; 
+      box-sizing: border-box; 
+      -webkit-tap-highlight-color: transparent; 
+    }
+    
+    html, body {
+      font-family: var(--font-body);
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    #app {
+      min-height: 100vh;
+    }
+
+    /* Flash overlay */
+    .flash-overlay {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0;
+      transition: opacity 0.1s;
+    }
+    .flash-overlay.work { background: var(--work); }
+    .flash-overlay.rest { background: var(--rest); }
+    .flash-overlay.active { opacity: 0.3; }
+
+    /* Header */
+    .header {
+      text-align: center;
+      padding: 32px 20px 24px;
+      border-bottom: 1px solid var(--bg-elevated);
+      position: relative;
+    }
+    .header-icon {
+      width: 40px;
+      height: 40px;
+      margin: 0 auto 12px;
+      color: var(--gold);
+    }
+    .header h1 {
+      font-family: var(--font-display);
+      font-size: 1.8rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      color: var(--text);
+    }
+    .header h2 {
+      font-family: var(--font-display);
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.25em;
+      color: var(--text-secondary);
+      margin-top: 2px;
+    }
+    .header-tagline {
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      color: var(--text-dim);
+      margin-top: 14px;
+      text-transform: uppercase;
+    }
+    .header-author {
+      display: inline-block;
+      font-family: var(--font-display);
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      color: var(--gold-dim);
+      margin-top: 8px;
+    }
+
+    /* Settings button */
+    .settings-btn {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--bg-card);
+      border: 1px solid var(--bg-elevated);
+      border-radius: 8px;
+      color: var(--text-dim);
+      cursor: pointer;
+    }
+    .settings-btn svg { width: 20px; height: 20px; }
+
+    /* Grid */
+    .grid {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      background: var(--bg-elevated);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Card */
+    .card {
+      display: grid;
+      grid-template-columns: 48px 1fr 24px;
+      gap: 12px;
+      align-items: center;
+      padding: 16px 14px;
+      background: var(--bg);
+      cursor: pointer;
+    }
+    .card:active { background: var(--bg-card); }
+    .card-icon {
+      width: 40px;
+      height: 40px;
+      color: var(--text-secondary);
+    }
+    .card-title {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      color: var(--text);
+    }
+    .card-subtitle {
+      font-size: 0.7rem;
+      font-weight: 500;
+      color: var(--text-dim);
+      margin-top: 1px;
+    }
+    .card-meta {
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      margin-top: 4px;
+    }
+    .card-arrow {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      color: var(--gold-dim);
+      opacity: 0.6;
+    }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      padding: 24px 20px;
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      border-top: 1px solid var(--bg-elevated);
+    }
+
+    /* Weight Selection */
+    .weight-view {
+      min-height: 100vh;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      background: var(--bg);
+    }
+    .weight-header {
+      text-align: center;
+      margin: 16px 0 24px;
+    }
+    .weight-icon {
+      width: 56px;
+      height: 56px;
+      margin: 0 auto 12px;
+      color: var(--gold);
+    }
+    .weight-header h2 {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+    }
+    .weight-header p {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      margin-top: 4px;
+    }
+    .weight-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      max-width: 360px;
+      margin: 0 auto;
+      width: 100%;
+    }
+    .weight-btn {
+      aspect-ratio: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      font-weight: 600;
+      background: var(--bg-card);
+      border: 2px solid var(--bg-elevated);
+      border-radius: 10px;
+      color: var(--text-secondary);
+      cursor: pointer;
+    }
+    .weight-btn:active {
+      background: var(--bg-elevated);
+      border-color: var(--gold-dim);
+    }
+    .weight-btn.selected {
+      background: var(--gold);
+      border-color: var(--gold);
+      color: var(--bg);
+    }
+    .weight-btn span {
+      font-size: 0.6rem;
+      font-family: var(--font-body);
+      font-weight: 600;
+    }
+    .weight-actions {
+      margin-top: auto;
+      padding: 20px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      max-width: 360px;
+      width: 100%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* Timer View */
+    .timer-view {
+      min-height: 100vh;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: var(--bg);
+    }
+    .timer-top-bar {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 4px;
+    }
+    .back-btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: none;
+      border: none;
+      color: var(--text-secondary);
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      padding: 8px 0;
+    }
+    .back-btn svg { width: 16px; height: 16px; }
+    
+    .audio-toggle {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--bg-card);
+      border: 1px solid var(--bg-elevated);
+      border-radius: 6px;
+      padding: 6px 12px;
+      color: var(--text-secondary);
+      font-size: 0.7rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .audio-toggle svg { width: 16px; height: 16px; }
+    .audio-toggle.muted { color: var(--text-muted); }
+
+    .timer-header {
+      text-align: center;
+      margin: 8px 0;
+    }
+    .timer-icon {
+      width: 44px;
+      height: 44px;
+      margin: 0 auto 6px;
+      color: var(--gold);
+    }
+    .timer-header h1 {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+    }
+    .timer-header p {
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+    }
+    .timer-weight {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      margin-top: 6px;
+      padding: 5px 12px;
+      background: var(--bg-card);
+      border-radius: 5px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--gold);
+    }
+    .timer-weight svg { width: 14px; height: 14px; }
+
+    /* Timer Ring */
+    .timer-ring-container {
+      position: relative;
+      width: 220px;
+      height: 220px;
+      margin: 16px 0;
+      flex-shrink: 0;
+    }
+    .timer-ring {
+      width: 100%;
+      height: 100%;
+      transform: rotate(-90deg);
+    }
+    .ring-bg {
+      fill: none;
+      stroke: var(--bg-elevated);
+      stroke-width: 6;
+    }
+    .ring-progress {
+      fill: none;
+      stroke: var(--text-muted);
+      stroke-width: 6;
+      stroke-linecap: round;
+      transition: stroke-dashoffset 0.25s linear, stroke 0.3s;
+    }
+    .ring-progress.work { stroke: var(--work); }
+    .ring-progress.rest { stroke: var(--rest); }
+    .ring-progress.set_rest { stroke: var(--set-rest); }
+    .ring-progress.countdown { stroke: var(--text-dim); }
+    .ring-progress.finished { stroke: var(--gold); }
+
+    .timer-center {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .timer-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+    .timer-label.work { color: var(--work); }
+    .timer-label.rest { color: var(--rest); }
+    .timer-label.set_rest { color: var(--set-rest); }
+    .timer-label.finished { color: var(--gold); }
+
+    .timer-time {
+      font-family: var(--font-display);
+      font-size: 3.2rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      color: var(--text);
+      line-height: 1;
+      margin: 2px 0;
+    }
+    .timer-total {
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--text-dim);
+    }
+
+    /* Stats */
+    .timer-stats {
+      display: flex;
+      gap: 12px;
+      margin: 8px 0;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .stat {
+      text-align: center;
+      padding: 10px 16px;
+      background: var(--bg-card);
+      border-radius: 8px;
+      min-width: 70px;
+    }
+    .stat-val {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .stat-dim { 
+      color: var(--text-dim); 
+      font-size: 0.95rem;
+    }
+    .stat-lbl {
+      display: block;
+      font-size: 0.6rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      margin-top: 2px;
+    }
+
+    /* Big Rep Counter */
+    .rep-counter {
+      width: 100%;
+      max-width: 360px;
+      margin: 6px 0;
+    }
+    .rep-btn {
+      width: 100%;
+      padding: 24px 16px;
+      background: var(--bg-card);
+      border: 2px solid var(--bg-elevated);
+      border-radius: 14px;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .rep-btn:active {
+      background: var(--bg-elevated);
+      border-color: var(--gold-dim);
+    }
+    .rep-btn .rep-val {
+      font-family: var(--font-display);
+      font-size: 3rem;
+      font-weight: 700;
+      color: var(--gold);
+      line-height: 1;
+    }
+    .rep-btn .rep-lbl {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+
+    /* Controls */
+    .timer-controls {
+      display: flex;
+      gap: 10px;
+      margin: 12px 0;
+      width: 100%;
+      max-width: 360px;
+    }
+    .btn {
+      flex: 1;
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      padding: 14px 20px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      text-transform: uppercase;
+    }
+    .btn-primary {
+      background: var(--gold);
+      color: var(--bg);
+    }
+    .btn-primary:active { filter: brightness(0.9); }
+    .btn-secondary {
+      background: var(--bg-elevated);
+      color: var(--text);
+    }
+    .btn-secondary:active { background: var(--bg-input); }
+    .btn-ghost {
+      background: transparent;
+      border: 2px solid var(--bg-elevated);
+      color: var(--text-secondary);
+    }
+    .btn-ghost:active { border-color: var(--text-muted); }
+
+    /* Finish Box */
+    .finish-box {
+      text-align: center;
+      padding: 20px 28px;
+      background: var(--bg-card);
+      border: 2px solid var(--gold-dim);
+      border-radius: 12px;
+      margin: 12px 0;
+      width: 100%;
+      max-width: 360px;
+    }
+    .finish-box svg {
+      width: 32px;
+      height: 32px;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+    .finish-box h3 {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      color: var(--gold);
+      margin-bottom: 10px;
+    }
+    .finish-box p {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      margin: 4px 0;
+    }
+    .finish-box strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    /* Info Panel */
+    .timer-info {
+      width: 100%;
+      max-width: 360px;
+      padding: 14px;
+      background: var(--bg-card);
+      border-radius: 10px;
+      margin-top: auto;
+    }
+    .info-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--bg-elevated);
+    }
+    .info-row:last-of-type { border-bottom: none; }
+    .info-row span:first-child { 
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+    }
+    .info-row span:last-child { 
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .info-exercises {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 10px;
+    }
+    .info-exercises span {
+      font-size: 0.7rem;
+      font-weight: 600;
+      padding: 5px 10px;
+      background: var(--bg-elevated);
+      border-radius: 5px;
+      color: var(--text-secondary);
+    }
+    .info-rules {
+      margin-top: 10px;
+      padding: 10px 12px;
+      background: rgba(122, 84, 84, 0.2);
+      border-left: 3px solid var(--blood);
+      border-radius: 0 6px 6px 0;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+    }
+
+    /* Modal */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.7);
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      z-index: 1000;
+      padding: 16px;
+    }
+    .modal {
+      background: var(--bg-card);
+      border-radius: 14px;
+      width: 100%;
+      max-width: 360px;
+      padding: 20px;
+    }
+    .modal h3 {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      margin-bottom: 16px;
+    }
+    .modal-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--bg-elevated);
+    }
+    .modal-row:last-of-type { border-bottom: none; }
+    .modal-row label {
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+    }
+    .toggle {
+      width: 48px;
+      height: 28px;
+      background: var(--bg-elevated);
+      border-radius: 14px;
+      position: relative;
+      cursor: pointer;
+    }
+    .toggle.on { background: var(--gold); }
+    .toggle::after {
+      content: '';
+      position: absolute;
+      width: 22px;
+      height: 22px;
+      background: var(--text);
+      border-radius: 50%;
+      top: 3px;
+      left: 3px;
+      transition: transform 0.2s;
+    }
+    .toggle.on::after { transform: translateX(20px); }
+    .modal-close {
+      width: 100%;
+      margin-top: 16px;
+      padding: 12px;
+      background: var(--bg-elevated);
+      border: none;
+      border-radius: 8px;
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text);
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div id="app"></div>
+  <div id="flash" class="flash-overlay"></div>
+
+  <script>
+    var protocols = [
+      { id: 'yggdrasil', name: 'YGGDRASIL', subtitle: "L'Albero del Mondo", type: 'EMOM', reps: '6-10', workTime: 60, restTime: 0, restBetweenSets: 0, totalSets: 1, roundsPerSet: 20, zone: '3-4', rpe: '6-7', exercises: ['Swing', 'H2H Swing', 'Clean', 'Hang Clean'] },
+      { id: 'bifrost', name: 'BIFRÖST', subtitle: 'Il Ponte Arcobaleno', type: '4×4min', workTime: 20, restTime: 20, restBetweenSets: 180, totalSets: 4, roundsPerSet: 6, zone: '4', rpe: '7-8', exercises: ['Swing', 'Snatch', 'Tactical Clean', 'Clean to Push Press'], displayWorkRest: '20s:20s' },
+      { id: 'fenrir', name: 'FENRIR', subtitle: 'Il Lupo Gigante', type: '3×3min', workTime: 15, restTime: 15, restBetweenSets: 120, totalSets: 3, roundsPerSet: 6, zone: '4-5', rpe: '8-9', exercises: ['Snatch', 'Clean', 'Tactical Clean', 'Hang Clean'], displayWorkRest: '15s:15s' },
+      { id: 'loki', name: 'LOKI', subtitle: 'Il Mutaforma', type: 'EMOM', reps: '5-8', workTime: 60, restTime: 0, restBetweenSets: 0, totalSets: 1, roundsPerSet: 12, zone: '3-4', rpe: '7-8', exercises: ['Random'] },
+      { id: 'thor', name: 'ÞÓRR', subtitle: 'Il Dio del Tuono', type: 'Interval', workTime: 30, restTime: 30, restBetweenSets: 0, totalSets: 1, roundsPerSet: 20, zone: '4', rpe: '8', exercises: ['Swing', 'H2H Swing', 'Clean', 'Clean to Push Press', 'Tactical Clean', 'Hang Clean'], displayWorkRest: '30s:30s' },
+      { id: 'odin', name: 'ÓÐINN', subtitle: 'Il Padre di Tutto', type: 'AMRAP', workTime: 20, restTime: 10, restBetweenSets: 0, totalSets: 1, roundsPerSet: 16, zone: '4-5', rpe: '9-10', exercises: ['Swing', 'Snatch', 'Clean', 'Clean to Push Press'], displayWorkRest: '20s:10s' },
+      { id: 'valhalla', name: 'VALHÖLL', subtitle: 'La Sala dei Caduti', type: 'TEST', workTime: 300, restTime: 0, restBetweenSets: 0, totalSets: 1, roundsPerSet: 1, zone: '4-5', rpe: '9-10', exercises: ['Snatch'], rules: 'Il kettlebell non tocca mai terra. Nessuna pausa.' }
+    ];
+
+    var weights = [8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48];
+
+    var icons = {
+      yggdrasil: '<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M32 56V20"/><path d="M32 20C32 20 24 12 16 14C8 16 8 24 12 28C16 32 24 30 32 20"/><path d="M32 20C32 20 40 12 48 14C56 16 56 24 52 28C48 32 40 30 32 20"/><path d="M32 32C28 36 22 38 18 36"/><path d="M32 32C36 36 42 38 46 36"/><path d="M32 44C28 46 24 48 22 52"/><path d="M32 44C36 46 40 48 42 52"/><circle cx="32" cy="14" r="4" fill="currentColor" opacity="0.3"/></svg>',
+      bifrost: '<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M8 52C8 52 20 20 32 20C44 20 56 52 56 52"/><path d="M12 48C12 48 22 24 32 24C42 24 52 48 52 48" opacity="0.7"/><path d="M16 44C16 44 24 28 32 28C40 28 48 44 48 44" opacity="0.5"/><circle cx="32" cy="14" r="3" fill="currentColor" opacity="0.5"/></svg>',
+      fenrir: '<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 24L8 12L16 18L20 10L24 20"/><path d="M48 24L56 12L48 18L44 10L40 20"/><path d="M16 24C16 24 12 32 16 40C20 48 28 52 32 52C36 52 44 48 48 40C52 32 48 24 48 24"/><path d="M24 32C24 32 28 36 32 36C36 36 40 32 40 32"/><circle cx="24" cy="28" r="2" fill="currentColor"/><circle cx="40" cy="28" r="2" fill="currentColor"/></svg>',
+      loki: '<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 28C16 16 8 12 8 12"/><path d="M44 28C48 16 56 12 56 12"/><path d="M20 28C20 28 16 36 20 44C24 52 32 54 32 54C32 54 40 52 44 44C48 36 44 28 44 28"/><path d="M20 28C24 26 28 26 32 28C36 26 40 26 44 28"/><circle cx="26" cy="36" r="2" fill="currentColor"/><circle cx="38" cy="36" r="2" fill="currentColor"/><path d="M28 44C30 46 34 46 36 44"/></svg>',
+      thor: '<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="28" y="8" width="8" height="20" rx="1"/><rect x="12" y="28" width="40" height="20" rx="2"/><path d="M12 32H52" opacity="0.5"/><path d="M12 44H52" opacity="0.5"/><rect x="28" y="48" width="8" height="8" rx="1"/></svg>',
+      odin: '<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 32C8 32 18 16 32 16C46 16 56 32 56 32C56 32 46 48 32 48C18 48 8 32 8 32Z"/><circle cx="32" cy="32" r="10"/><circle cx="32" cy="32" r="4" fill="currentColor"/><path d="M32 16V8"/><path d="M32 56V48"/></svg>',
+      valhalla: '<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 48L48 16"/><path d="M48 48L16 16"/><path d="M12 12C12 12 8 16 10 22C12 28 20 28 20 20C20 12 12 12 12 12Z" fill="currentColor" opacity="0.2"/><path d="M52 12C52 12 56 16 54 22C52 28 44 28 44 20C44 12 52 12 52 12Z" fill="currentColor" opacity="0.2"/><path d="M12 52C12 52 8 48 10 42C12 36 20 36 20 44C20 52 12 52 12 52Z" fill="currentColor" opacity="0.2"/><path d="M52 52C52 52 56 48 54 42C52 36 44 36 44 44C44 52 52 52 52 52Z" fill="currentColor" opacity="0.2"/><circle cx="32" cy="32" r="4" fill="currentColor" opacity="0.3"/></svg>',
+      valknut: '<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M32 8L52 44H12L32 8Z"/><path d="M32 16L22 36H42L32 16Z"/><path d="M32 24L27 32H37L32 24Z"/></svg>',
+      settings: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>',
+      back: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>',
+      volume: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>',
+      muted: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>',
+      kb: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="6" r="3"/><path d="M12 9v2"/><ellipse cx="12" cy="16" rx="6" ry="5"/></svg>'
+    };
+
+    var state = { view: 'home', protocol: null, weight: 16, audioEnabled: true, showSettings: false, timerState: 'idle', timeLeft: 3, totalTime: 0, currentRound: 1, currentSet: 1, reps: 0, isRunning: false };
+    
+    try { var sw = localStorage.getItem('kb_weight'); if (sw) state.weight = parseInt(sw); var sa = localStorage.getItem('kb_audio'); if (sa !== null) state.audioEnabled = sa !== 'false'; } catch(e) {}
+
+    var timerInterval = null, audioCtx = null;
+
+    function getAudioCtx() { if (!audioCtx) { try { audioCtx = new (window.AudioContext || window.webkitAudioContext)(); } catch(e) {} } return audioCtx; }
+    function playBeep(freq, dur, type) { if (!state.audioEnabled) return; try { var ctx = getAudioCtx(); if (!ctx) return; var osc = ctx.createOscillator(), gain = ctx.createGain(); osc.connect(gain); gain.connect(ctx.destination); osc.frequency.value = freq || 800; osc.type = type || 'sine'; gain.gain.setValueAtTime(0.2, ctx.currentTime); gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + (dur || 0.15)); osc.start(ctx.currentTime); osc.stop(ctx.currentTime + (dur || 0.15)); } catch(e) {} }
+    var audio = { start: function() { playBeep(880, 0.25, 'square'); }, tick: function() { playBeep(440, 0.08, 'sine'); }, setRest: function() { playBeep(330, 0.15); setTimeout(function() { playBeep(330, 0.15); }, 180); }, end: function() { playBeep(330, 0.15); setTimeout(function() { playBeep(440, 0.15); }, 150); setTimeout(function() { playBeep(550, 0.3); }, 300); } };
+
+    function vibrate(p) { try { if (navigator.vibrate) navigator.vibrate(p); } catch(e) {} }
+    function flash(t) { var el = document.getElementById('flash'); if (!el) return; el.className = 'flash-overlay ' + t + ' active'; setTimeout(function() { el.classList.remove('active'); }, 150); }
+    function formatTime(s) { var m = Math.floor(s / 60), sec = s % 60; return (m < 10 ? '0' : '') + m + ':' + (sec < 10 ? '0' : '') + sec; }
+    function getMaxTime() { var p = state.protocol; if (!p) return 1; if (state.timerState === 'countdown') return 3; if (state.timerState === 'work') return p.workTime; if (state.timerState === 'rest') return p.restTime; if (state.timerState === 'set_rest') return p.restBetweenSets; return 1; }
+
+    function startTimer() { state.timerState = 'countdown'; state.timeLeft = 3; state.totalTime = 0; state.currentRound = 1; state.currentSet = 1; state.reps = 0; state.isRunning = true; runTimer(); }
+    function pauseTimer() { state.isRunning = false; if (timerInterval) clearInterval(timerInterval); render(); }
+    function resumeTimer() { state.isRunning = true; runTimer(); }
+    function resetTimer() { state.isRunning = false; state.timerState = 'idle'; state.timeLeft = 3; state.totalTime = 0; state.currentRound = 1; state.currentSet = 1; state.reps = 0; if (timerInterval) clearInterval(timerInterval); render(); }
+
+    function runTimer() { if (timerInterval) clearInterval(timerInterval); render(); timerInterval = setInterval(function() { if (!state.isRunning) return; state.timeLeft--; if (state.timerState !== 'countdown' && state.timerState !== 'idle' && state.timerState !== 'finished') state.totalTime++; if (state.timeLeft <= 3 && state.timeLeft > 0) audio.tick(); if (state.timeLeft <= 0) handleTransition(); render(); }, 1000); }
+
+    function handleTransition() { var p = state.protocol, s = state; if (s.timerState === 'countdown') { audio.start(); vibrate([200]); flash('work'); s.timerState = 'work'; s.timeLeft = p.workTime; return; } if (s.timerState === 'work') { if (p.restTime === 0) { if (s.currentRound >= p.roundsPerSet) { if (s.currentSet >= p.totalSets) { finishWorkout(); return; } if (p.restBetweenSets > 0) { audio.setRest(); vibrate([100, 50, 100]); flash('rest'); s.timerState = 'set_rest'; s.timeLeft = p.restBetweenSets; return; } } audio.tick(); s.currentRound++; s.timeLeft = p.workTime; return; } audio.tick(); vibrate([100]); flash('rest'); s.timerState = 'rest'; s.timeLeft = p.restTime; return; } if (s.timerState === 'rest') { if (s.currentRound >= p.roundsPerSet) { if (s.currentSet >= p.totalSets) { finishWorkout(); return; } if (p.restBetweenSets > 0) { audio.setRest(); vibrate([100, 50, 100]); s.timerState = 'set_rest'; s.timeLeft = p.restBetweenSets; return; } } audio.start(); vibrate([200]); flash('work'); s.timerState = 'work'; s.currentRound++; s.timeLeft = p.workTime; return; } if (s.timerState === 'set_rest') { audio.start(); vibrate([200]); flash('work'); s.timerState = 'work'; s.currentRound = 1; s.currentSet++; s.timeLeft = p.workTime; return; } }
+    function finishWorkout() { audio.end(); vibrate([100, 50, 100, 50, 200]); state.timerState = 'finished'; state.isRunning = false; if (timerInterval) clearInterval(timerInterval); }
+
+    function render() { var app = document.getElementById('app'); if (!app) return; if (state.view === 'home') app.innerHTML = renderHome(); else if (state.view === 'weight') app.innerHTML = renderWeightSelection(); else if (state.view === 'timer') app.innerHTML = renderTimer(); }
+
+    function renderHome() { var h = '<div><header class="header"><button class="settings-btn" id="settingsBtn">' + icons.settings + '</button><div class="header-icon">' + icons.valknut + '</div><h1>KETTLEBELLS</h1><h2>FOR PERFORMANCE</h2><p class="header-tagline">7 Protocolli · Forza · Potenza · Velocità · Resistenza</p><span class="header-author">Nicholas Rubini</span></header><main class="grid">'; for (var i = 0; i < protocols.length; i++) { var p = protocols[i]; h += '<div class="card" data-id="' + p.id + '"><div class="card-icon">' + icons[p.id] + '</div><div><div class="card-title">' + p.name + '</div><div class="card-subtitle">' + p.subtitle + '</div><div class="card-meta">' + p.type + ' · RPE ' + p.rpe + ' · Z' + p.zone + '</div></div><div class="card-arrow">›</div></div>'; } h += '</main><footer class="footer">NicholasRubini.it</footer>'; if (state.showSettings) h += '<div class="modal-overlay" id="modalOverlay"><div class="modal"><h3>Impostazioni</h3><div class="modal-row"><label>Audio</label><div class="toggle ' + (state.audioEnabled ? 'on' : '') + '" id="audioToggle"></div></div><div class="modal-row"><label>Peso predefinito</label><span style="font-weight:700;color:var(--text);">' + state.weight + 'kg</span></div><button class="modal-close" id="modalClose">Chiudi</button></div></div>'; h += '</div>'; setTimeout(attachHomeEvents, 0); return h; }
+
+    function renderWeightSelection() { var p = state.protocol; var h = '<div class="weight-view"><button class="back-btn" id="backBtn">' + icons.back + ' Indietro</button><div class="weight-header"><div class="weight-icon">' + icons[p.id] + '</div><h2>' + p.name + '</h2><p>Seleziona il peso del kettlebell</p></div><div class="weight-grid">'; for (var i = 0; i < weights.length; i++) { var w = weights[i]; h += '<button class="weight-btn ' + (w === state.weight ? 'selected' : '') + '" data-weight="' + w + '">' + w + '<span>kg</span></button>'; } h += '</div><div class="weight-actions"><button class="btn btn-primary" id="startBtn">INIZIA WORKOUT</button><button class="btn btn-ghost" id="cancelBtn">Annulla</button></div></div>'; setTimeout(attachWeightEvents, 0); return h; }
+
+    function renderTimer() { var p = state.protocol, s = state, progress = s.timerState === 'idle' ? 0 : (s.timeLeft / getMaxTime()), circ = 2 * Math.PI * 90; var labels = { idle: 'PRONTO', countdown: 'PREPARATI', work: 'LAVORO', rest: 'RIPOSO', set_rest: 'RECUPERO', finished: 'GLORIA' }; var h = '<div class="timer-view"><div class="timer-top-bar"><button class="back-btn" id="exitBtn">' + icons.back + ' Esci</button><button class="audio-toggle ' + (!state.audioEnabled ? 'muted' : '') + '" id="audioBtn">' + (state.audioEnabled ? icons.volume : icons.muted) + '</button></div><div class="timer-header"><div class="timer-icon">' + icons[p.id] + '</div><h1>' + p.name + '</h1><p>' + p.subtitle + '</p><div class="timer-weight">' + icons.kb + ' ' + state.weight + 'kg</div></div><div class="timer-ring-container"><svg class="timer-ring" viewBox="0 0 200 200"><circle cx="100" cy="100" r="90" class="ring-bg"/><circle cx="100" cy="100" r="90" class="ring-progress ' + s.timerState + '" style="stroke-dasharray:' + circ + ';stroke-dashoffset:' + (circ * progress) + '"/></svg><div class="timer-center"><span class="timer-label ' + s.timerState + '">' + labels[s.timerState] + '</span><span class="timer-time">' + formatTime(s.timeLeft) + '</span>' + (s.timerState !== 'idle' && s.timerState !== 'finished' ? '<span class="timer-total">Totale: ' + formatTime(s.totalTime) + '</span>' : '') + '</div></div><div class="timer-stats">'; if (p.totalSets > 1) h += '<div class="stat"><span class="stat-val">' + s.currentSet + '<span class="stat-dim">/' + p.totalSets + '</span></span><span class="stat-lbl">Serie</span></div>'; h += '<div class="stat"><span class="stat-val">' + s.currentRound + '<span class="stat-dim">/' + p.roundsPerSet + '</span></span><span class="stat-lbl">Round</span></div></div>'; if (p.type === 'AMRAP' || p.type === 'TEST') h += '<div class="rep-counter"><button class="rep-btn" id="repBtn"><span class="rep-val">' + s.reps + '</span><span class="rep-lbl">Tap per aggiungere rep</span></button></div>'; h += '<div class="timer-controls">'; if (s.timerState === 'idle') h += '<button class="btn btn-primary" id="timerStartBtn">INIZIA</button>'; else if (s.timerState === 'finished') h += '<button class="btn btn-primary" id="resetBtn">NUOVO</button><button class="btn btn-ghost" id="homeBtn">HOME</button>'; else h += '<button class="btn btn-secondary" id="pauseBtn">' + (s.isRunning ? 'PAUSA' : 'RIPRENDI') + '</button><button class="btn btn-ghost" id="resetBtn">RESET</button>'; h += '</div>'; if (s.timerState === 'finished') h += '<div class="finish-box">' + icons.valknut + '<h3>Workout Completato</h3><p>Tempo: <strong>' + formatTime(s.totalTime) + '</strong></p>' + (s.reps > 0 ? '<p>Ripetizioni: <strong>' + s.reps + '</strong></p>' : '') + '<p>Peso: <strong>' + state.weight + 'kg</strong></p></div>'; h += '<div class="timer-info"><div class="info-row"><span>Tipo</span><span>' + p.type + '</span></div>' + (p.displayWorkRest ? '<div class="info-row"><span>Work:Rest</span><span>' + p.displayWorkRest + '</span></div>' : '') + '<div class="info-row"><span>Zona</span><span>' + p.zone + '</span></div><div class="info-row"><span>RPE</span><span>' + p.rpe + '</span></div>' + (p.restBetweenSets > 0 ? '<div class="info-row"><span>Rec. Serie</span><span>' + (p.restBetweenSets / 60) + 'min</span></div>' : '') + '<div class="info-exercises">'; for (var i = 0; i < p.exercises.length; i++) h += '<span>' + p.exercises[i] + '</span>'; h += '</div>' + (p.rules ? '<p class="info-rules">⚠ ' + p.rules + '</p>' : '') + '</div></div>'; setTimeout(attachTimerEvents, 0); return h; }
+
+    function attachHomeEvents() { var cards = document.querySelectorAll('.card'); for (var i = 0; i < cards.length; i++) { (function(card) { card.onclick = function() { for (var j = 0; j < protocols.length; j++) { if (protocols[j].id === card.getAttribute('data-id')) { state.protocol = protocols[j]; break; } } state.view = 'weight'; render(); }; })(cards[i]); } var sb = document.getElementById('settingsBtn'); if (sb) sb.onclick = function() { state.showSettings = true; render(); }; var mo = document.getElementById('modalOverlay'); if (mo) mo.onclick = function(e) { if (e.target === mo) { state.showSettings = false; render(); } }; var mc = document.getElementById('modalClose'); if (mc) mc.onclick = function() { state.showSettings = false; render(); }; var at = document.getElementById('audioToggle'); if (at) at.onclick = function() { state.audioEnabled = !state.audioEnabled; try { localStorage.setItem('kb_audio', state.audioEnabled); } catch(e) {} if (state.audioEnabled) audio.tick(); render(); }; }
+
+    function attachWeightEvents() { var bb = document.getElementById('backBtn'); if (bb) bb.onclick = function() { state.view = 'home'; state.protocol = null; render(); }; var wbs = document.querySelectorAll('.weight-btn'); for (var i = 0; i < wbs.length; i++) { (function(wb) { wb.onclick = function() { state.weight = parseInt(wb.getAttribute('data-weight')); try { localStorage.setItem('kb_weight', state.weight); } catch(e) {} render(); }; })(wbs[i]); } var stb = document.getElementById('startBtn'); if (stb) stb.onclick = function() { state.view = 'timer'; state.timerState = 'idle'; state.timeLeft = 3; render(); }; var cb = document.getElementById('cancelBtn'); if (cb) cb.onclick = function() { state.view = 'home'; state.protocol = null; render(); }; }
+
+    function attachTimerEvents() { var eb = document.getElementById('exitBtn'); if (eb) eb.onclick = function() { if (state.timerState !== 'idle' && state.timerState !== 'finished') { if (confirm('Vuoi abbandonare il workout?')) { resetTimer(); state.view = 'home'; state.protocol = null; render(); } } else { resetTimer(); state.view = 'home'; state.protocol = null; render(); } }; var ab = document.getElementById('audioBtn'); if (ab) ab.onclick = function() { state.audioEnabled = !state.audioEnabled; try { localStorage.setItem('kb_audio', state.audioEnabled); } catch(e) {} if (state.audioEnabled) audio.tick(); render(); }; var tsb = document.getElementById('timerStartBtn'); if (tsb) tsb.onclick = startTimer; var pb = document.getElementById('pauseBtn'); if (pb) pb.onclick = function() { if (state.isRunning) pauseTimer(); else resumeTimer(); }; var rb = document.getElementById('resetBtn'); if (rb) rb.onclick = resetTimer; var hb = document.getElementById('homeBtn'); if (hb) hb.onclick = function() { resetTimer(); state.view = 'home'; state.protocol = null; render(); }; var rpb = document.getElementById('repBtn'); if (rpb) rpb.onclick = function() { state.reps++; vibrate([30]); render(); }; }
+
+    render();
+  </script>
+</body>
+</html>
