@@ -1,0 +1,1679 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#0c0c0e">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="KB Performance">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="description" content="7 Protocolli Kettlebell per Forza, Potenza, Velocità e Resistenza">
+  
+  <title>Kettlebells for Performance</title>
+  
+  <!-- Apple Touch Icon -->
+  <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect fill='%230c0c0e' width='180' height='180'/%3E%3Cpath fill='%23c9b370' d='M90 35L135 125H45L90 35Z'/%3E%3Cpath fill='%23c9b370' d='M90 55L68 95H112L90 55Z' opacity='0.5'/%3E%3Cpath fill='%23c9b370' d='M90 70L80 90H100L90 70Z' opacity='0.3'/%3E%3C/svg%3E">
+  
+  <!-- Splash Screens for iPhone -->
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 430px) and (device-height: 932px) and (-webkit-device-pixel-ratio: 3)" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 430 932'%3E%3Crect fill='%230c0c0e' width='430' height='932'/%3E%3Cpath fill='%23c9b370' d='M215 380L280 500H150L215 380Z'/%3E%3C/svg%3E">
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 393px) and (device-height: 852px) and (-webkit-device-pixel-ratio: 3)" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 393 852'%3E%3Crect fill='%230c0c0e' width='393' height='852'/%3E%3Cpath fill='%23c9b370' d='M196 350L261 470H131L196 350Z'/%3E%3C/svg%3E">
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 428px) and (device-height: 926px) and (-webkit-device-pixel-ratio: 3)" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 428 926'%3E%3Crect fill='%230c0c0e' width='428' height='926'/%3E%3Cpath fill='%23c9b370' d='M214 380L279 500H149L214 380Z'/%3E%3C/svg%3E">
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3)" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 390 844'%3E%3Crect fill='%230c0c0e' width='390' height='844'/%3E%3Cpath fill='%23c9b370' d='M195 350L260 470H130L195 350Z'/%3E%3C/svg%3E">
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3)" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 375 812'%3E%3Crect fill='%230c0c0e' width='375' height='812'/%3E%3Cpath fill='%23c9b370' d='M187 330L252 450H122L187 330Z'/%3E%3C/svg%3E">
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3)" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 414 896'%3E%3Crect fill='%230c0c0e' width='414' height='896'/%3E%3Cpath fill='%23c9b370' d='M207 370L272 490H142L207 370Z'/%3E%3C/svg%3E">
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2)" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 414 896'%3E%3Crect fill='%230c0c0e' width='414' height='896'/%3E%3Cpath fill='%23c9b370' d='M207 370L272 490H142L207 370Z'/%3E%3C/svg%3E">
+  <link rel="apple-touch-startup-image" media="screen and (device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 375 667'%3E%3Crect fill='%230c0c0e' width='375' height='667'/%3E%3Cpath fill='%23c9b370' d='M187 280L252 400H122L187 280Z'/%3E%3C/svg%3E">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg: #0c0c0e;
+      --bg-card: #151517;
+      --bg-elevated: #1e1e22;
+      --bg-input: #252528;
+      
+      --text: #f0ede6;
+      --text-secondary: #c5c2ba;
+      --text-dim: #9a978f;
+      --text-muted: #5a5955;
+      
+      --gold: #c9b370;
+      --gold-bright: #e0cc8a;
+      --gold-dim: #a08a50;
+      
+      --forest: #5a7a50;
+      --aurora: #7a6a8a;
+      --steel: #6a7078;
+      --serpent: #5a7365;
+      --thunder: #5a6578;
+      --raven: #6c6255;
+      --blood: #7a5454;
+      
+      --work: #c9b370;
+      --rest: #6a8090;
+      --set-rest: #5a7a50;
+      
+      --font-display: 'Cormorant Garamond', Georgia, serif;
+      --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      
+      --safe-top: env(safe-area-inset-top, 0px);
+      --safe-bottom: env(safe-area-inset-bottom, 0px);
+      --safe-left: env(safe-area-inset-left, 0px);
+      --safe-right: env(safe-area-inset-right, 0px);
+    }
+
+    * { 
+      margin: 0; 
+      padding: 0; 
+      box-sizing: border-box; 
+      -webkit-tap-highlight-color: transparent;
+      -webkit-touch-callout: none;
+    }
+    
+    html {
+      height: 100%;
+      overflow: hidden;
+    }
+    
+    body {
+      font-family: var(--font-body);
+      background: var(--bg);
+      color: var(--text);
+      height: 100%;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      -webkit-text-size-adjust: 100%;
+      overscroll-behavior: none;
+      overflow: hidden;
+      position: fixed;
+      width: 100%;
+      padding-top: var(--safe-top);
+      padding-bottom: var(--safe-bottom);
+      padding-left: var(--safe-left);
+      padding-right: var(--safe-right);
+    }
+
+    #app {
+      height: 100%;
+      overflow-y: auto;
+      overflow-x: hidden;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    #app { overscroll-behavior-y: contain; }
+
+    .flash-overlay {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0;
+      transition: opacity 0.1s;
+    }
+    .flash-overlay.work { background: var(--work); }
+    .flash-overlay.rest { background: var(--rest); }
+    .flash-overlay.active { opacity: 0.3; }
+
+    .header {
+      text-align: center;
+      padding: 28px 20px 24px;
+      border-bottom: 1px solid var(--bg-elevated);
+      position: relative;
+    }
+    .header-icon {
+      width: 48px;
+      height: 48px;
+      margin: 0 auto 14px;
+      color: var(--gold);
+    }
+    .header h1 {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      color: var(--text);
+      line-height: 1.1;
+    }
+    .header h2 {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 600;
+      letter-spacing: 0.35em;
+      color: var(--gold);
+      margin-top: 6px;
+      text-transform: uppercase;
+    }
+    .header-tagline {
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      color: var(--text-dim);
+      margin-top: 16px;
+      text-transform: uppercase;
+    }
+    .header-author {
+      display: inline-block;
+      font-family: var(--font-display);
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      color: var(--gold-dim);
+      margin-top: 8px;
+    }
+
+    .settings-btn {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--bg-card);
+      border: 1px solid var(--bg-elevated);
+      border-radius: 10px;
+      color: var(--text-dim);
+      cursor: pointer;
+    }
+    .settings-btn:active { background: var(--bg-elevated); }
+    .settings-btn svg { width: 20px; height: 20px; }
+
+    .grid {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      background: var(--bg-elevated);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .card {
+      display: grid;
+      grid-template-columns: 52px 1fr 28px;
+      gap: 12px;
+      align-items: center;
+      padding: 16px 14px;
+      background: var(--bg);
+      cursor: pointer;
+      transition: background 0.1s;
+    }
+    .card:active { background: var(--bg-card); }
+    .card-icon {
+      width: 44px;
+      height: 44px;
+      color: var(--text-secondary);
+    }
+    .card-title {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      color: var(--text);
+    }
+    .card-subtitle {
+      font-size: 0.72rem;
+      font-weight: 500;
+      color: var(--text-dim);
+      margin-top: 1px;
+    }
+    .card-meta {
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      margin-top: 4px;
+    }
+    .card-arrow {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      color: var(--gold-dim);
+      opacity: 0.6;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 24px 20px 32px;
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      border-top: 1px solid var(--bg-elevated);
+    }
+
+    .weight-view {
+      min-height: 100%;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      background: var(--bg);
+    }
+    .weight-header {
+      text-align: center;
+      margin: 12px 0 20px;
+    }
+    .weight-icon {
+      width: 56px;
+      height: 56px;
+      margin: 0 auto 10px;
+      color: var(--gold);
+    }
+    .weight-header h2 {
+      font-family: var(--font-display);
+      font-size: 1.6rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+    }
+    .weight-header p {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      margin-top: 4px;
+    }
+    .weight-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      max-width: 340px;
+      margin: 0 auto;
+      width: 100%;
+    }
+    .weight-btn {
+      aspect-ratio: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      font-weight: 600;
+      background: var(--bg-card);
+      border: 2px solid var(--bg-elevated);
+      border-radius: 12px;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all 0.1s;
+    }
+    .weight-btn:active {
+      background: var(--bg-elevated);
+      border-color: var(--gold-dim);
+    }
+    .weight-btn.selected {
+      background: var(--gold);
+      border-color: var(--gold);
+      color: var(--bg);
+    }
+    .weight-btn span {
+      font-size: 0.6rem;
+      font-family: var(--font-body);
+      font-weight: 600;
+    }
+    .weight-actions {
+      margin-top: auto;
+      padding: 16px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      max-width: 340px;
+      width: 100%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .timer-view {
+      min-height: 100%;
+      padding: 10px 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: var(--bg);
+    }
+    .timer-top-bar {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2px;
+    }
+    .back-btn {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      background: none;
+      border: none;
+      color: var(--text-secondary);
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      padding: 10px 4px;
+      min-height: 44px;
+    }
+    .back-btn:active { color: var(--text); }
+    .back-btn svg { width: 18px; height: 18px; }
+    
+    .audio-toggle {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--bg-card);
+      border: 1px solid var(--bg-elevated);
+      border-radius: 8px;
+      padding: 8px 14px;
+      color: var(--text-secondary);
+      font-size: 0.7rem;
+      font-weight: 600;
+      cursor: pointer;
+      min-height: 44px;
+    }
+    .audio-toggle:active { background: var(--bg-elevated); }
+    .audio-toggle svg { width: 18px; height: 18px; }
+    .audio-toggle.muted { color: var(--text-muted); }
+
+    .timer-header {
+      text-align: center;
+      margin: 4px 0;
+    }
+    .timer-icon {
+      width: 40px;
+      height: 40px;
+      margin: 0 auto 4px;
+      color: var(--gold);
+    }
+    .timer-header h1 {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+    }
+    .timer-header p {
+      font-size: 0.72rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+    }
+    .timer-weight {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      margin-top: 5px;
+      padding: 5px 12px;
+      background: var(--bg-card);
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--gold);
+    }
+    .timer-weight svg { width: 14px; height: 14px; }
+
+    .timer-ring-container {
+      position: relative;
+      width: min(220px, 50vw);
+      height: min(220px, 50vw);
+      margin: 12px 0;
+      flex-shrink: 0;
+    }
+    .timer-ring {
+      width: 100%;
+      height: 100%;
+      transform: rotate(-90deg);
+    }
+    .ring-bg {
+      fill: none;
+      stroke: var(--bg-elevated);
+      stroke-width: 6;
+    }
+    .ring-progress {
+      fill: none;
+      stroke: var(--text-muted);
+      stroke-width: 6;
+      stroke-linecap: round;
+      transition: stroke-dashoffset 0.25s linear, stroke 0.3s;
+    }
+    .ring-progress.work { stroke: var(--work); }
+    .ring-progress.rest { stroke: var(--rest); }
+    .ring-progress.set_rest { stroke: var(--set-rest); }
+    .ring-progress.countdown { stroke: var(--text-dim); }
+    .ring-progress.finished { stroke: var(--gold); }
+
+    .timer-center {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .timer-label {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+    .timer-label.work { color: var(--work); }
+    .timer-label.rest { color: var(--rest); }
+    .timer-label.set_rest { color: var(--set-rest); }
+    .timer-label.finished { color: var(--gold); }
+
+    .timer-time {
+      font-family: var(--font-display);
+      font-size: min(3rem, 12vw);
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      color: var(--text);
+      line-height: 1;
+      margin: 2px 0;
+    }
+    .timer-total {
+      font-size: 0.72rem;
+      font-weight: 500;
+      color: var(--text-dim);
+    }
+
+    .timer-stats {
+      display: flex;
+      gap: 10px;
+      margin: 6px 0;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .stat {
+      text-align: center;
+      padding: 8px 14px;
+      background: var(--bg-card);
+      border-radius: 8px;
+      min-width: 65px;
+    }
+    .stat-val {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .stat-dim { 
+      color: var(--text-dim); 
+      font-size: 0.9rem;
+    }
+    .stat-lbl {
+      display: block;
+      font-size: 0.58rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      margin-top: 2px;
+    }
+
+    .rep-counter {
+      width: 100%;
+      max-width: 340px;
+      margin: 4px 0;
+    }
+    .rep-btn {
+      width: 100%;
+      padding: 20px 16px;
+      background: var(--bg-card);
+      border: 2px solid var(--bg-elevated);
+      border-radius: 14px;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: all 0.1s;
+    }
+    .rep-btn:active {
+      background: var(--bg-elevated);
+      border-color: var(--gold-dim);
+      transform: scale(0.98);
+    }
+    .rep-btn .rep-val {
+      font-family: var(--font-display);
+      font-size: 2.8rem;
+      font-weight: 700;
+      color: var(--gold);
+      line-height: 1;
+    }
+    .rep-btn .rep-lbl {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+
+    .timer-controls {
+      display: flex;
+      gap: 10px;
+      margin: 10px 0;
+      width: 100%;
+      max-width: 340px;
+    }
+    .btn {
+      flex: 1;
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      padding: 16px 20px;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      text-transform: uppercase;
+      transition: all 0.1s;
+      min-height: 52px;
+    }
+    .btn:active { transform: scale(0.98); }
+    .btn-primary {
+      background: var(--gold);
+      color: var(--bg);
+    }
+    .btn-primary:active { filter: brightness(0.9); }
+    .btn-secondary {
+      background: var(--bg-elevated);
+      color: var(--text);
+    }
+    .btn-secondary:active { background: var(--bg-input); }
+    .btn-ghost {
+      background: transparent;
+      border: 2px solid var(--bg-elevated);
+      color: var(--text-secondary);
+    }
+    .btn-ghost:active { border-color: var(--text-muted); }
+
+    .finish-box {
+      text-align: center;
+      padding: 18px 24px;
+      background: var(--bg-card);
+      border: 2px solid var(--gold-dim);
+      border-radius: 14px;
+      margin: 10px 0;
+      width: 100%;
+      max-width: 340px;
+    }
+    .finish-box svg {
+      width: 28px;
+      height: 28px;
+      color: var(--gold);
+      margin-bottom: 6px;
+    }
+    .finish-box h3 {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+    .finish-box p {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      margin: 3px 0;
+    }
+    .finish-box strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .timer-info {
+      width: 100%;
+      max-width: 340px;
+      padding: 12px;
+      background: var(--bg-card);
+      border-radius: 12px;
+      margin-top: auto;
+    }
+    .info-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 7px 0;
+      border-bottom: 1px solid var(--bg-elevated);
+    }
+    .info-row:last-of-type { border-bottom: none; }
+    .info-row span:first-child { 
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+    }
+    .info-row span:last-child { 
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .info-exercises {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      margin-top: 8px;
+    }
+    .info-exercises span {
+      font-size: 0.68rem;
+      font-weight: 600;
+      padding: 4px 9px;
+      background: var(--bg-elevated);
+      border-radius: 5px;
+      color: var(--text-secondary);
+    }
+    .info-rules {
+      margin-top: 8px;
+      padding: 9px 11px;
+      background: rgba(122, 84, 84, 0.2);
+      border-left: 3px solid var(--blood);
+      border-radius: 0 6px 6px 0;
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+    }
+
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.75);
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      z-index: 1000;
+      padding: 16px;
+      padding-bottom: calc(16px + var(--safe-bottom));
+    }
+    .modal {
+      background: var(--bg-card);
+      border-radius: 16px;
+      width: 100%;
+      max-width: 360px;
+      padding: 20px;
+    }
+    .modal h3 {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      margin-bottom: 16px;
+    }
+    .modal-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--bg-elevated);
+    }
+    .modal-row:last-of-type { border-bottom: none; }
+    .modal-row label {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+    }
+    .toggle {
+      width: 52px;
+      height: 32px;
+      background: var(--bg-elevated);
+      border-radius: 16px;
+      position: relative;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .toggle.on { background: var(--gold); }
+    .toggle::after {
+      content: '';
+      position: absolute;
+      width: 26px;
+      height: 26px;
+      background: var(--text);
+      border-radius: 50%;
+      top: 3px;
+      left: 3px;
+      transition: transform 0.2s;
+    }
+    .toggle.on::after { transform: translateX(20px); }
+    .modal-close {
+      width: 100%;
+      margin-top: 16px;
+      padding: 14px;
+      background: var(--bg-elevated);
+      border: none;
+      border-radius: 10px;
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text);
+      cursor: pointer;
+      min-height: 48px;
+    }
+    .modal-close:active { background: var(--bg-input); }
+
+    @media (max-height: 600px) and (orientation: landscape) {
+      .timer-ring-container { width: 140px; height: 140px; }
+      .timer-time { font-size: 2rem; }
+      .timer-header { margin: 2px 0; }
+      .timer-stats { margin: 4px 0; }
+    }
+
+    @media (max-width: 350px) {
+      .header h1 { font-size: 1.7rem; letter-spacing: 0.12em; }
+      .header h2 { font-size: 1rem; letter-spacing: 0.25em; }
+      .weight-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+  </style>
+</head>
+<body>
+  <div id="app"></div>
+  <div id="flash" class="flash-overlay"></div>
+
+  <script>
+    (function() {
+      'use strict';
+
+      // ═══════════════════════════════════════════════════════════════
+      // KETTLEBELLS FOR PERFORMANCE - PWA
+      // By Nicholas Rubini
+      // With Voice Coaching (Full 5-4-3-2-1 countdown)
+      // ═══════════════════════════════════════════════════════════════
+
+      var protocols = [
+        { id: 'yggdrasil', name: 'YGGDRASIL', subtitle: "L'Albero del Mondo", type: 'EMOM', reps: '6-10', workTime: 60, restTime: 0, restBetweenSets: 0, totalSets: 1, roundsPerSet: 20, zone: '3-4', rpe: '6-7', exercises: ['Swing', 'H2H Swing', 'Clean', 'Hang Clean'] },
+        { id: 'bifrost', name: 'BIFRÖST', subtitle: 'Il Ponte Arcobaleno', type: '4×4min', workTime: 20, restTime: 20, restBetweenSets: 180, totalSets: 4, roundsPerSet: 6, zone: '4', rpe: '7-8', exercises: ['Swing', 'Snatch', 'Tactical Clean', 'Clean to Push Press'], displayWorkRest: '20s:20s' },
+        { id: 'fenrir', name: 'FENRIR', subtitle: 'Il Lupo Gigante', type: '3×3min', workTime: 15, restTime: 15, restBetweenSets: 120, totalSets: 3, roundsPerSet: 6, zone: '4-5', rpe: '8-9', exercises: ['Snatch', 'Clean', 'Tactical Clean', 'Hang Clean'], displayWorkRest: '15s:15s' },
+        { id: 'loki', name: 'LOKI', subtitle: 'Il Mutaforma', type: 'EMOM', reps: '5-8', workTime: 60, restTime: 0, restBetweenSets: 0, totalSets: 1, roundsPerSet: 12, zone: '3-4', rpe: '7-8', exercises: ['Random'] },
+        { id: 'thor', name: 'ÞÓRR', subtitle: 'Il Dio del Tuono', type: 'Interval', workTime: 30, restTime: 30, restBetweenSets: 0, totalSets: 1, roundsPerSet: 20, zone: '4', rpe: '8', exercises: ['Swing', 'H2H Swing', 'Clean', 'Clean to Push Press', 'Tactical Clean', 'Hang Clean'], displayWorkRest: '30s:30s' },
+        { id: 'odin', name: 'ÓÐINN', subtitle: 'Il Padre di Tutto', type: 'AMRAP', workTime: 20, restTime: 10, restBetweenSets: 0, totalSets: 1, roundsPerSet: 16, zone: '4-5', rpe: '9-10', exercises: ['Swing', 'Snatch', 'Clean', 'Clean to Push Press'], displayWorkRest: '20s:10s' },
+        { id: 'valhalla', name: 'VALHÖLL', subtitle: 'La Sala dei Caduti', type: 'TEST', workTime: 300, restTime: 0, restBetweenSets: 0, totalSets: 1, roundsPerSet: 1, zone: '4-5', rpe: '9-10', exercises: ['Snatch'], rules: 'Il kettlebell non tocca mai terra. Nessuna pausa.' }
+      ];
+
+      var weights = [8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48];
+
+      var icons = {
+        yggdrasil: '<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M32 56V20"/><path d="M32 20C32 20 24 12 16 14C8 16 8 24 12 28C16 32 24 30 32 20"/><path d="M32 20C32 20 40 12 48 14C56 16 56 24 52 28C48 32 40 30 32 20"/><path d="M32 32C28 36 22 38 18 36"/><path d="M32 32C36 36 42 38 46 36"/><path d="M32 44C28 46 24 48 22 52"/><path d="M32 44C36 46 40 48 42 52"/><circle cx="32" cy="14" r="4" fill="currentColor" opacity="0.3"/></svg>',
+        bifrost: '<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M8 52C8 52 20 20 32 20C44 20 56 52 56 52"/><path d="M12 48C12 48 22 24 32 24C42 24 52 48 52 48" opacity="0.7"/><path d="M16 44C16 44 24 28 32 28C40 28 48 44 48 44" opacity="0.5"/><circle cx="32" cy="14" r="3" fill="currentColor" opacity="0.5"/></svg>',
+        fenrir: '<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 24L8 12L16 18L20 10L24 20"/><path d="M48 24L56 12L48 18L44 10L40 20"/><path d="M16 24C16 24 12 32 16 40C20 48 28 52 32 52C36 52 44 48 48 40C52 32 48 24 48 24"/><path d="M24 32C24 32 28 36 32 36C36 36 40 32 40 32"/><circle cx="24" cy="28" r="2" fill="currentColor"/><circle cx="40" cy="28" r="2" fill="currentColor"/></svg>',
+        loki: '<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 28C16 16 8 12 8 12"/><path d="M44 28C48 16 56 12 56 12"/><path d="M20 28C20 28 16 36 20 44C24 52 32 54 32 54C32 54 40 52 44 44C48 36 44 28 44 28"/><path d="M20 28C24 26 28 26 32 28C36 26 40 26 44 28"/><circle cx="26" cy="36" r="2" fill="currentColor"/><circle cx="38" cy="36" r="2" fill="currentColor"/><path d="M28 44C30 46 34 46 36 44"/></svg>',
+        thor: '<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="28" y="8" width="8" height="20" rx="1"/><rect x="12" y="28" width="40" height="20" rx="2"/><path d="M12 32H52" opacity="0.5"/><path d="M12 44H52" opacity="0.5"/><rect x="28" y="48" width="8" height="8" rx="1"/></svg>',
+        odin: '<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 32C8 32 18 16 32 16C46 16 56 32 56 32C56 32 46 48 32 48C18 48 8 32 8 32Z"/><circle cx="32" cy="32" r="10"/><circle cx="32" cy="32" r="4" fill="currentColor"/><path d="M32 16V8"/><path d="M32 56V48"/></svg>',
+        valhalla: '<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 48L48 16"/><path d="M48 48L16 16"/><path d="M12 12C12 12 8 16 10 22C12 28 20 28 20 20C20 12 12 12 12 12Z" fill="currentColor" opacity="0.2"/><path d="M52 12C52 12 56 16 54 22C52 28 44 28 44 20C44 12 52 12 52 12Z" fill="currentColor" opacity="0.2"/><path d="M12 52C12 52 8 48 10 42C12 36 20 36 20 44C20 52 12 52 12 52Z" fill="currentColor" opacity="0.2"/><path d="M52 52C52 52 56 48 54 42C52 36 44 36 44 44C44 52 52 52 52 52Z" fill="currentColor" opacity="0.2"/><circle cx="32" cy="32" r="4" fill="currentColor" opacity="0.3"/></svg>',
+        valknut: '<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M32 8L52 44H12L32 8Z"/><path d="M32 16L22 36H42L32 16Z"/><path d="M32 24L27 32H37L32 24Z"/></svg>',
+        settings: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>',
+        back: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>',
+        volume: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>',
+        muted: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>',
+        kb: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="6" r="3"/><path d="M12 9v2"/><ellipse cx="12" cy="16" rx="6" ry="5"/></svg>'
+      };
+
+      // Italian number words for voice countdown
+      var numberWords = {
+        1: 'uno',
+        2: 'due', 
+        3: 'tre',
+        4: 'quattro',
+        5: 'cinque'
+      };
+
+      var state = { 
+        view: 'home', 
+        protocol: null, 
+        weight: 16, 
+        audioEnabled: true,
+        voiceEnabled: true,
+        muted: false,
+        showSettings: false, 
+        timerState: 'idle', 
+        timeLeft: 3, 
+        totalTime: 0, 
+        currentRound: 1, 
+        currentSet: 1, 
+        reps: 0, 
+        isRunning: false 
+      };
+      
+      // Load saved settings
+      try { 
+        var sw = localStorage.getItem('kb_weight'); 
+        if (sw) state.weight = parseInt(sw); 
+        var sa = localStorage.getItem('kb_audio'); 
+        if (sa !== null) state.audioEnabled = sa !== 'false';
+        var sv = localStorage.getItem('kb_voice');
+        if (sv !== null) state.voiceEnabled = sv !== 'false';
+        var sm = localStorage.getItem('kb_muted');
+        if (sm !== null) state.muted = sm === 'true';
+      } catch(e) {}
+
+      // ═══════════════════════════════════════════════════════════════
+      // TIMER ENGINE
+      // ═══════════════════════════════════════════════════════════════
+      
+      var timerRAF = null;
+      var timerStartTime = null;
+      var timerPausedAt = null;
+      var timerPhaseStartTime = null;
+      var phaseDuration = 0;
+      var phaseEndTime = null;
+
+      var lastSpokenSecond = -1;
+      var lastRenderKey = '';
+
+      var audioCtx = null;
+      var speechSynthAvailable = 'speechSynthesis' in window;
+
+      // Wake Lock
+      var wakeLock = null;
+      
+      async function requestWakeLock() {
+        if (!('wakeLock' in navigator)) return;
+        try {
+          wakeLock = await navigator.wakeLock.request('screen');
+          wakeLock.addEventListener('release', function() {
+            wakeLock = null;
+            if (document.visibilityState === 'visible' && state.isRunning && state.timerState !== 'finished') {
+              setTimeout(requestWakeLock, 400);
+            }
+          });
+        } catch (e) {}
+      }
+      
+      function releaseWakeLock() {
+        if (wakeLock) {
+          wakeLock.release();
+          wakeLock = null;
+        }
+      }
+
+      document.addEventListener('visibilitychange', function() {
+        if (document.visibilityState === 'visible' && state.isRunning) {
+          requestWakeLock();
+          if (audioCtx && audioCtx.state === 'suspended') {
+            audioCtx.resume();
+          }
+        }
+      });
+
+      // ═══════════════════════════════════════════════════════════════
+      // AUDIO SYSTEM
+      // ═══════════════════════════════════════════════════════════════
+
+      function getAudioCtx() { 
+        if (!audioCtx) { 
+          try { 
+            audioCtx = new (window.AudioContext || window.webkitAudioContext)(); 
+          } catch(e) {} 
+        } 
+        return audioCtx; 
+      }
+
+      function unlockAudio() {
+        if (!state.audioEnabled || state.muted) return;
+        var ctx = getAudioCtx();
+        if (!ctx) return;
+        try {
+          if (ctx.state === 'suspended') ctx.resume();
+          var o = ctx.createOscillator();
+          var g = ctx.createGain();
+          g.gain.setValueAtTime(0.0001, ctx.currentTime);
+          o.connect(g);
+          g.connect(ctx.destination);
+          o.start(ctx.currentTime);
+          o.stop(ctx.currentTime + 0.02);
+        } catch(e) {}
+      }
+
+      function playBeep(freq, dur, type) { 
+        if (!state.audioEnabled || state.muted) return; 
+        try { 
+          var ctx = getAudioCtx(); 
+          if (!ctx) return; 
+          if (ctx.state === 'suspended') ctx.resume();
+          var osc = ctx.createOscillator(); 
+          var gain = ctx.createGain(); 
+          osc.connect(gain); 
+          gain.connect(ctx.destination); 
+          osc.frequency.value = freq || 800; 
+          osc.type = type || 'sine'; 
+          gain.gain.setValueAtTime(0.3, ctx.currentTime); 
+          gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + (dur || 0.15)); 
+          osc.start(ctx.currentTime); 
+          osc.stop(ctx.currentTime + (dur || 0.15)); 
+        } catch(e) {} 
+      }
+
+      var audio = { 
+        start: function() { playBeep(880, 0.3, 'square'); },
+        setRest: function() { playBeep(440, 0.2, 'sine'); setTimeout(function() { playBeep(440, 0.2, 'sine'); }, 200); }, 
+        end: function() { playBeep(440, 0.15); setTimeout(function() { playBeep(550, 0.15); }, 150); setTimeout(function() { playBeep(660, 0.4); }, 300); } 
+      };
+
+      // ═══════════════════════════════════════════════════════════════
+      // VOICE COACHING SYSTEM
+      // ═══════════════════════════════════════════════════════════════
+
+      function unlockSpeech() {
+        if (!speechSynthAvailable || !state.voiceEnabled || state.muted) return;
+        try {
+          speechSynthesis.cancel();
+          var utterance = new SpeechSynthesisUtterance('');
+          utterance.volume = 0;
+          speechSynthesis.speak(utterance);
+        } catch(e) {}
+      }
+
+      function speak(text) {
+        if (!state.voiceEnabled || state.muted || !speechSynthAvailable) return;
+        try {
+          speechSynthesis.cancel();
+          
+          var utterance = new SpeechSynthesisUtterance(text);
+          utterance.lang = 'it-IT';
+          utterance.rate = 1.2;
+          utterance.pitch = 1.0;
+          utterance.volume = 1.0;
+          
+          var voices = speechSynthesis.getVoices();
+          for (var i = 0; i < voices.length; i++) {
+            if (voices[i].lang.indexOf('it') === 0) {
+              utterance.voice = voices[i];
+              break;
+            }
+          }
+          
+          speechSynthesis.speak(utterance);
+        } catch(e) {}
+      }
+
+      function cancelSpeech() {
+        if (!speechSynthAvailable) return;
+        try { speechSynthesis.cancel(); } catch(e) {}
+      }
+
+      // Preload voices
+      if (speechSynthAvailable) {
+        speechSynthesis.getVoices();
+        if (speechSynthesis.onvoiceschanged !== undefined) {
+          speechSynthesis.onvoiceschanged = function() {
+            speechSynthesis.getVoices();
+          };
+        }
+      }
+
+      // ═══════════════════════════════════════════════════════════════
+      // UTILITIES
+      // ═══════════════════════════════════════════════════════════════
+
+      function vibrate(p) { 
+        try { if (navigator.vibrate) navigator.vibrate(p); } catch(e) {} 
+      }
+
+      function flash(t) { 
+        var el = document.getElementById('flash'); 
+        if (!el) return; 
+        el.className = 'flash-overlay ' + t + ' active'; 
+        setTimeout(function() { el.classList.remove('active'); }, 150); 
+      }
+
+      function formatTime(s) { 
+        var m = Math.floor(s / 60), sec = s % 60; 
+        return (m < 10 ? '0' : '') + m + ':' + (sec < 10 ? '0' : '') + sec; 
+      }
+
+      function getMaxTime() { 
+        var p = state.protocol; 
+        if (!p) return 1; 
+        if (state.timerState === 'countdown') return 3; 
+        if (state.timerState === 'work') return p.workTime; 
+        if (state.timerState === 'rest') return p.restTime; 
+        if (state.timerState === 'set_rest') return p.restBetweenSets; 
+        return 1; 
+      }
+
+      // ═══════════════════════════════════════════════════════════════
+      // TIMER FUNCTIONS
+      // ═══════════════════════════════════════════════════════════════
+
+      function startTimer() { 
+        state.timerState = 'countdown'; 
+        state.totalTime = 0; 
+        state.currentRound = 1; 
+        state.currentSet = 1; 
+        state.reps = 0; 
+        state.isRunning = true;
+
+        phaseDuration = 3;
+        state.timeLeft = 3;
+        timerPhaseStartTime = Date.now();
+        phaseEndTime = timerPhaseStartTime + (phaseDuration * 1000);
+        timerStartTime = Date.now();
+        lastSpokenSecond = -1;
+        lastRenderKey = '';
+
+        unlockAudio();
+        unlockSpeech();
+        requestWakeLock();
+
+        runTimerLoop(); 
+      }
+
+      function pauseTimer() { 
+        state.isRunning = false;
+        timerPausedAt = Date.now();
+        cancelSpeech();
+        if (timerRAF) {
+          cancelAnimationFrame(timerRAF);
+          timerRAF = null;
+        }
+        render(); 
+      }
+
+      function resumeTimer() { 
+        if (!state.isRunning && timerPausedAt) {
+          var pauseDuration = Date.now() - timerPausedAt;
+          if (timerPhaseStartTime) timerPhaseStartTime += pauseDuration;
+          if (timerStartTime) timerStartTime += pauseDuration;
+          if (phaseEndTime) phaseEndTime += pauseDuration;
+          timerPausedAt = null;
+        }
+        state.isRunning = true;
+
+        unlockAudio();
+        unlockSpeech();
+        requestWakeLock();
+
+        runTimerLoop(); 
+      }
+
+      function resetTimer() { 
+        state.isRunning = false; 
+        state.timerState = 'idle'; 
+        state.timeLeft = 3; 
+        state.totalTime = 0; 
+        state.currentRound = 1; 
+        state.currentSet = 1; 
+        state.reps = 0;
+        timerStartTime = null;
+        timerPhaseStartTime = null;
+        timerPausedAt = null;
+        phaseEndTime = null;
+        lastSpokenSecond = -1;
+        lastRenderKey = '';
+
+        cancelSpeech();
+
+        if (timerRAF) {
+          cancelAnimationFrame(timerRAF);
+          timerRAF = null;
+        }
+
+        releaseWakeLock();
+        render(); 
+      }
+
+      function runTimerLoop() {
+        if (timerRAF) cancelAnimationFrame(timerRAF);
+
+        function tick() {
+          if (!state.isRunning) return;
+
+          var now = Date.now();
+
+          // Catch-up loop (e.g. tab switched / device throttled)
+          // Avoid spamming cues for missed transitions
+          var safety = 0;
+          while (phaseEndTime && now >= phaseEndTime && safety++ < 50 && state.isRunning && state.timerState !== 'finished') {
+            var boundary = phaseEndTime;
+            var silent = (now - boundary) > 500; // transition already in the past -> no audio/voice/vibration spam
+            handleTransition(boundary, silent);
+          }
+
+          if (!state.isRunning || state.timerState === 'finished' || !phaseEndTime) return;
+
+          var remaining = Math.max(0, (phaseEndTime - now) / 1000);
+          var currentSecond = Math.ceil(remaining);
+
+          state.timeLeft = currentSecond;
+
+          if (state.timerState !== 'countdown' && state.timerState !== 'idle' && state.timerState !== 'finished' && timerStartTime) {
+            state.totalTime = Math.floor((now - timerStartTime) / 1000);
+          }
+
+          // Voice countdown: full 5-4-3-2-1 (no beeps during countdown)
+          if (currentSecond !== lastSpokenSecond && currentSecond <= 5 && currentSecond >= 1 && remaining > 0) {
+            speak(numberWords[currentSecond]);
+            lastSpokenSecond = currentSecond;
+          }
+
+          // Render only when changed
+          var key = state.timerState + '|' + state.timeLeft + '|' + state.totalTime + '|' + state.currentRound + '|' + state.currentSet + '|' + state.reps + '|' + (state.isRunning ? 1 : 0) + '|' + (state.muted ? 1 : 0);
+          if (key !== lastRenderKey) {
+            lastRenderKey = key;
+            render();
+          }
+
+          if (state.isRunning && state.timerState !== 'finished') {
+            timerRAF = requestAnimationFrame(tick);
+          }
+        }
+
+        timerRAF = requestAnimationFrame(tick);
+      }
+
+      function startNewPhase(newState, duration, startAtMs) {
+        state.timerState = newState;
+        phaseDuration = duration;
+        state.timeLeft = duration;
+        timerPhaseStartTime = (typeof startAtMs === 'number') ? startAtMs : Date.now();
+        phaseEndTime = timerPhaseStartTime + (duration * 1000);
+        lastSpokenSecond = -1;
+        lastRenderKey = '';
+
+        if (newState === 'work' && state.currentRound === 1 && state.currentSet === 1) {
+          timerStartTime = timerPhaseStartTime;
+        }
+      }
+
+      function handleTransition(phaseBoundaryMs, silent) { 
+        var p = state.protocol, s = state; 
+        var boundary = (typeof phaseBoundaryMs === 'number') ? phaseBoundaryMs : Date.now();
+        var quiet = !!silent;
+
+        if (s.timerState === 'countdown') { 
+          if (!quiet) {
+            audio.start();
+            speak('Via');
+            vibrate([200]); 
+            flash('work');
+          }
+          startNewPhase('work', p.workTime, boundary);
+          return; 
+        }
+
+        if (s.timerState === 'work') { 
+          // EMOM / continuous blocks (restTime = 0): chain work blocks without a rest phase
+          if (p.restTime === 0) { 
+            if (s.currentRound >= p.roundsPerSet) { 
+              if (s.currentSet >= p.totalSets) { 
+                finishWorkout(quiet); 
+                return; 
+              } 
+              if (p.restBetweenSets > 0) { 
+                if (!quiet) {
+                  audio.setRest();
+                  speak('Recupero');
+                  vibrate([100, 50, 100]); 
+                  flash('rest');
+                }
+                startNewPhase('set_rest', p.restBetweenSets, boundary);
+                return; 
+              }
+              s.currentSet++;
+              s.currentRound = 1;
+            } else {
+              s.currentRound++;
+            }
+            // Cue the new minute/block (important for EMOM usability)
+            if (!quiet) {
+              audio.start();
+              vibrate([80]);
+              flash('work');
+            }
+            startNewPhase('work', p.workTime, boundary);
+            return; 
+          }
+
+          // Standard work -> rest
+          if (!quiet) {
+            audio.setRest();
+            speak('Riposo');
+            vibrate([100]); 
+            flash('rest');
+          }
+          startNewPhase('rest', p.restTime, boundary);
+          return; 
+        }
+
+        if (s.timerState === 'rest') { 
+          if (s.currentRound >= p.roundsPerSet) { 
+            if (s.currentSet >= p.totalSets) { 
+              finishWorkout(quiet); 
+              return; 
+            } 
+            if (p.restBetweenSets > 0) { 
+              if (!quiet) {
+                audio.setRest();
+                speak('Recupero');
+                vibrate([100, 50, 100]);
+                flash('rest');
+              }
+              startNewPhase('set_rest', p.restBetweenSets, boundary);
+              return; 
+            }
+            s.currentSet++;
+            s.currentRound = 1;
+
+            if (!quiet) {
+              audio.start();
+              speak('Via');
+              vibrate([200]); 
+              flash('work');
+            }
+            startNewPhase('work', p.workTime, boundary);
+            return;
+          } 
+
+          if (!quiet) {
+            audio.start();
+            speak('Via');
+            vibrate([200]); 
+            flash('work');
+          }
+          s.currentRound++;
+          startNewPhase('work', p.workTime, boundary);
+          return; 
+        }
+
+        if (s.timerState === 'set_rest') { 
+          if (!quiet) {
+            audio.start();
+            speak('Via');
+            vibrate([200]); 
+            flash('work');
+          }
+          s.currentRound = 1; 
+          s.currentSet++;
+          startNewPhase('work', p.workTime, boundary);
+          return; 
+        } 
+      }
+
+      function finishWorkout(quiet) { 
+        if (!quiet) {
+          audio.end();
+          speak('Tempo');
+          vibrate([100, 50, 100, 50, 200]);
+        }
+        state.timerState = 'finished'; 
+        state.isRunning = false;
+
+        if (timerRAF) {
+          cancelAnimationFrame(timerRAF);
+          timerRAF = null;
+        }
+
+        releaseWakeLock();
+        phaseEndTime = null;
+        lastRenderKey = '';
+
+        render();
+      }
+
+      // ═══════════════════════════════════════════════════════════════
+      // RENDER FUNCTIONS
+      // ═══════════════════════════════════════════════════════════════
+
+      function render() { 
+        var app = document.getElementById('app'); 
+        if (!app) return; 
+        if (state.view === 'home') app.innerHTML = renderHome(); 
+        else if (state.view === 'weight') app.innerHTML = renderWeightSelection(); 
+        else if (state.view === 'timer') app.innerHTML = renderTimer(); 
+      }
+
+      function renderHome() { 
+        var h = '<div><header class="header">';
+        h += '<button class="settings-btn" id="settingsBtn">' + icons.settings + '</button>';
+        h += '<div class="header-icon">' + icons.valknut + '</div>';
+        h += '<h1>KETTLEBELLS</h1>';
+        h += '<h2>FOR PERFORMANCE</h2>';
+        h += '<p class="header-tagline">7 Protocolli · Forza · Potenza · Velocità · Resistenza</p>';
+        h += '<span class="header-author">Nicholas Rubini</span>';
+        h += '</header><main class="grid">'; 
+        
+        for (var i = 0; i < protocols.length; i++) { 
+          var p = protocols[i]; 
+          h += '<div class="card" data-id="' + p.id + '">';
+          h += '<div class="card-icon">' + icons[p.id] + '</div>';
+          h += '<div><div class="card-title">' + p.name + '</div>';
+          h += '<div class="card-subtitle">' + p.subtitle + '</div>';
+          h += '<div class="card-meta">' + p.type + ' · RPE ' + p.rpe + ' · Z' + p.zone + '</div></div>';
+          h += '<div class="card-arrow">›</div></div>'; 
+        } 
+        
+        h += '</main><footer class="footer">NicholasRubini.it</footer>'; 
+        
+        if (state.showSettings) {
+          h += '<div class="modal-overlay" id="modalOverlay"><div class="modal">';
+          h += '<h3>Impostazioni</h3>';
+          h += '<div class="modal-row"><label>Suoni</label>';
+          h += '<div class="toggle ' + (state.audioEnabled ? 'on' : '') + '" id="audioToggle"></div></div>';
+          h += '<div class="modal-row"><label>Voce coach</label>';
+          h += '<div class="toggle ' + (state.voiceEnabled ? 'on' : '') + '" id="voiceToggle"></div></div>';
+          h += '<div class="modal-row"><label>Peso predefinito</label>';
+          h += '<span style="font-weight:700;color:var(--text);">' + state.weight + 'kg</span></div>';
+          h += '<button class="modal-close" id="modalClose">Chiudi</button>';
+          h += '</div></div>'; 
+        }
+        
+        h += '</div>'; 
+        setTimeout(attachHomeEvents, 0); 
+        return h; 
+      }
+
+      function renderWeightSelection() { 
+        var p = state.protocol; 
+        var h = '<div class="weight-view">';
+        h += '<button class="back-btn" id="backBtn">' + icons.back + ' Indietro</button>';
+        h += '<div class="weight-header">';
+        h += '<div class="weight-icon">' + icons[p.id] + '</div>';
+        h += '<h2>' + p.name + '</h2>';
+        h += '<p>Seleziona il peso del kettlebell</p></div>';
+        h += '<div class="weight-grid">'; 
+        
+        for (var i = 0; i < weights.length; i++) { 
+          var w = weights[i]; 
+          h += '<button class="weight-btn ' + (w === state.weight ? 'selected' : '') + '" data-weight="' + w + '">' + w + '<span>kg</span></button>'; 
+        } 
+        
+        h += '</div><div class="weight-actions">';
+        h += '<button class="btn btn-primary" id="startBtn">INIZIA WORKOUT</button>';
+        h += '<button class="btn btn-ghost" id="cancelBtn">Annulla</button>';
+        h += '</div></div>'; 
+        setTimeout(attachWeightEvents, 0); 
+        return h; 
+      }
+
+      function renderTimer() { 
+        var p = state.protocol, s = state;
+        var maxTime = getMaxTime();
+        var progress = s.timerState === 'idle' ? 0 : (s.timeLeft / maxTime);
+        var circ = 2 * Math.PI * 90; 
+        var labels = { 
+          idle: 'PRONTO', 
+          countdown: 'PREPARATI', 
+          work: 'LAVORO', 
+          rest: 'RIPOSO', 
+          set_rest: 'RECUPERO', 
+          finished: 'GLORIA' 
+        };
+        var isMuted = state.muted || (!state.audioEnabled && !state.voiceEnabled);
+        
+        var h = '<div class="timer-view">';
+        h += '<div class="timer-top-bar">';
+        h += '<button class="back-btn" id="exitBtn">' + icons.back + ' Esci</button>';
+        h += '<button class="audio-toggle ' + (isMuted ? 'muted' : '') + '" id="audioBtn">' + (isMuted ? icons.muted : icons.volume) + '</button>';
+        h += '</div>';
+        
+        h += '<div class="timer-header">';
+        h += '<div class="timer-icon">' + icons[p.id] + '</div>';
+        h += '<h1>' + p.name + '</h1>';
+        h += '<p>' + p.subtitle + '</p>';
+        h += '<div class="timer-weight">' + icons.kb + ' ' + state.weight + 'kg</div>';
+        h += '</div>';
+        
+        h += '<div class="timer-ring-container">';
+        h += '<svg class="timer-ring" viewBox="0 0 200 200">';
+        h += '<circle cx="100" cy="100" r="90" class="ring-bg"/>';
+        h += '<circle cx="100" cy="100" r="90" class="ring-progress ' + s.timerState + '" style="stroke-dasharray:' + circ + ';stroke-dashoffset:' + (circ * (1 - progress)) + '"/>';
+        h += '</svg>';
+        h += '<div class="timer-center">';
+        h += '<span class="timer-label ' + s.timerState + '">' + labels[s.timerState] + '</span>';
+        h += '<span class="timer-time">' + formatTime(s.timeLeft) + '</span>';
+        if (s.timerState !== 'idle' && s.timerState !== 'finished' && s.timerState !== 'countdown') {
+          h += '<span class="timer-total">Totale: ' + formatTime(s.totalTime) + '</span>';
+        }
+        h += '</div></div>';
+        
+        h += '<div class="timer-stats">';
+        if (p.totalSets > 1) {
+          h += '<div class="stat"><span class="stat-val">' + s.currentSet + '<span class="stat-dim">/' + p.totalSets + '</span></span><span class="stat-lbl">Serie</span></div>';
+        }
+        h += '<div class="stat"><span class="stat-val">' + s.currentRound + '<span class="stat-dim">/' + p.roundsPerSet + '</span></span><span class="stat-lbl">Round</span></div>';
+        h += '</div>';
+        
+        if (p.type === 'AMRAP' || p.type === 'TEST') {
+          h += '<div class="rep-counter"><button class="rep-btn" id="repBtn">';
+          h += '<span class="rep-val">' + s.reps + '</span>';
+          h += '<span class="rep-lbl">Tap per aggiungere rep</span>';
+          h += '</button></div>';
+        }
+        
+        h += '<div class="timer-controls">';
+        if (s.timerState === 'idle') {
+          h += '<button class="btn btn-primary" id="timerStartBtn">INIZIA</button>';
+        } else if (s.timerState === 'finished') {
+          h += '<button class="btn btn-primary" id="resetBtn">NUOVO</button>';
+          h += '<button class="btn btn-ghost" id="homeBtn">HOME</button>';
+        } else {
+          h += '<button class="btn btn-secondary" id="pauseBtn">' + (s.isRunning ? 'PAUSA' : 'RIPRENDI') + '</button>';
+          h += '<button class="btn btn-ghost" id="resetBtn">RESET</button>';
+        }
+        h += '</div>';
+        
+        if (s.timerState === 'finished') {
+          h += '<div class="finish-box">' + icons.valknut;
+          h += '<h3>Workout Completato</h3>';
+          h += '<p>Tempo: <strong>' + formatTime(s.totalTime) + '</strong></p>';
+          if (s.reps > 0) h += '<p>Ripetizioni: <strong>' + s.reps + '</strong></p>';
+          h += '<p>Peso: <strong>' + state.weight + 'kg</strong></p></div>';
+        }
+        
+        h += '<div class="timer-info">';
+        h += '<div class="info-row"><span>Tipo</span><span>' + p.type + '</span></div>';
+        if (p.displayWorkRest) h += '<div class="info-row"><span>Work:Rest</span><span>' + p.displayWorkRest + '</span></div>';
+        h += '<div class="info-row"><span>Zona</span><span>' + p.zone + '</span></div>';
+        h += '<div class="info-row"><span>RPE</span><span>' + p.rpe + '</span></div>';
+        if (p.restBetweenSets > 0) h += '<div class="info-row"><span>Rec. Serie</span><span>' + (p.restBetweenSets / 60) + 'min</span></div>';
+        h += '<div class="info-exercises">';
+        for (var i = 0; i < p.exercises.length; i++) h += '<span>' + p.exercises[i] + '</span>';
+        h += '</div>';
+        if (p.rules) h += '<p class="info-rules">⚠ ' + p.rules + '</p>';
+        h += '</div></div>';
+        
+        setTimeout(attachTimerEvents, 0); 
+        return h; 
+      }
+
+      // ═══════════════════════════════════════════════════════════════
+      // EVENT HANDLERS
+      // ═══════════════════════════════════════════════════════════════
+
+      function attachHomeEvents() { 
+        var cards = document.querySelectorAll('.card'); 
+        for (var i = 0; i < cards.length; i++) { 
+          (function(card) { 
+            card.onclick = function() { 
+              getAudioCtx();
+              unlockSpeech();
+              for (var j = 0; j < protocols.length; j++) { 
+                if (protocols[j].id === card.getAttribute('data-id')) { 
+                  state.protocol = protocols[j]; 
+                  break; 
+                } 
+              } 
+              state.view = 'weight'; 
+              render(); 
+            }; 
+          })(cards[i]); 
+        } 
+        
+        var sb = document.getElementById('settingsBtn'); 
+        if (sb) sb.onclick = function() { state.showSettings = true; render(); }; 
+        
+        var mo = document.getElementById('modalOverlay'); 
+        if (mo) mo.onclick = function(e) { if (e.target === mo) { state.showSettings = false; render(); } }; 
+        
+        var mc = document.getElementById('modalClose'); 
+        if (mc) mc.onclick = function() { state.showSettings = false; render(); }; 
+        
+        var at = document.getElementById('audioToggle'); 
+        if (at) at.onclick = function() { 
+          state.audioEnabled = !state.audioEnabled; 
+          try { localStorage.setItem('kb_audio', state.audioEnabled); } catch(e) {} 
+          if (state.audioEnabled) { 
+            state.muted = false; 
+            try { localStorage.setItem('kb_muted', state.muted); } catch(e) {} 
+            unlockAudio(); 
+            audio.start(); 
+          }
+          render(); 
+        };
+
+        var vt = document.getElementById('voiceToggle');
+        if (vt) vt.onclick = function() {
+          state.voiceEnabled = !state.voiceEnabled;
+          try { localStorage.setItem('kb_voice', state.voiceEnabled); } catch(e) {}
+          if (state.voiceEnabled) {
+            state.muted = false;
+            try { localStorage.setItem('kb_muted', state.muted); } catch(e) {}
+            unlockSpeech();
+            speak('Voce attiva');
+          }
+          render();
+        };
+      }
+
+      function attachWeightEvents() { 
+        var bb = document.getElementById('backBtn'); 
+        if (bb) bb.onclick = function() { state.view = 'home'; state.protocol = null; render(); }; 
+        
+        var wbs = document.querySelectorAll('.weight-btn'); 
+        for (var i = 0; i < wbs.length; i++) { 
+          (function(wb) { 
+            wb.onclick = function() { 
+              state.weight = parseInt(wb.getAttribute('data-weight')); 
+              try { localStorage.setItem('kb_weight', state.weight); } catch(e) {} 
+              render(); 
+            }; 
+          })(wbs[i]); 
+        } 
+        
+        var stb = document.getElementById('startBtn'); 
+        if (stb) stb.onclick = function() { 
+          state.view = 'timer'; 
+          state.timerState = 'idle'; 
+          state.timeLeft = 3; 
+          render(); 
+        }; 
+        
+        var cb = document.getElementById('cancelBtn'); 
+        if (cb) cb.onclick = function() { state.view = 'home'; state.protocol = null; render(); }; 
+      }
+
+      function attachTimerEvents() { 
+        var eb = document.getElementById('exitBtn'); 
+        if (eb) eb.onclick = function() { 
+          if (state.timerState !== 'idle' && state.timerState !== 'finished') { 
+            if (confirm('Vuoi abbandonare il workout?')) { 
+              resetTimer(); 
+              state.view = 'home'; 
+              state.protocol = null; 
+              render(); 
+            } 
+          } else { 
+            resetTimer(); 
+            state.view = 'home'; 
+            state.protocol = null; 
+            render(); 
+          } 
+        }; 
+        
+        var ab = document.getElementById('audioBtn'); 
+        if (ab) ab.onclick = function() { 
+          // Quick mute/unmute without losing the user's separate Audio/Voice preferences
+          if (!state.audioEnabled && !state.voiceEnabled) {
+            // If everything is disabled, enable both
+            state.audioEnabled = true;
+            state.voiceEnabled = true;
+            state.muted = false;
+            try { 
+              localStorage.setItem('kb_audio', state.audioEnabled);
+              localStorage.setItem('kb_voice', state.voiceEnabled);
+              localStorage.setItem('kb_muted', state.muted);
+            } catch(e) {} 
+            unlockAudio();
+            unlockSpeech();
+          } else {
+            state.muted = !state.muted;
+            try { localStorage.setItem('kb_muted', state.muted); } catch(e) {}
+            if (state.muted) {
+              cancelSpeech();
+            } else {
+              unlockAudio();
+              unlockSpeech();
+            }
+          }
+          render(); 
+        }; 
+        
+        var tsb = document.getElementById('timerStartBtn'); 
+        if (tsb) tsb.onclick = startTimer; 
+        
+        var pb = document.getElementById('pauseBtn'); 
+        if (pb) pb.onclick = function() { 
+          if (state.isRunning) pauseTimer(); 
+          else resumeTimer(); 
+        }; 
+        
+        var rb = document.getElementById('resetBtn'); 
+        if (rb) rb.onclick = resetTimer; 
+        
+        var hb = document.getElementById('homeBtn'); 
+        if (hb) hb.onclick = function() { 
+          resetTimer(); 
+          state.view = 'home'; 
+          state.protocol = null; 
+          render(); 
+        }; 
+        
+        var rpb = document.getElementById('repBtn'); 
+        if (rpb) rpb.onclick = function() { 
+          state.reps++; 
+          vibrate([30]); 
+          render(); 
+        }; 
+      }
+
+      // ═══════════════════════════════════════════════════════════════
+      // MOBILE OPTIMIZATIONS
+      // ═══════════════════════════════════════════════════════════════
+
+      var lastTouchEnd = 0;
+      document.addEventListener('touchend', function(e) {
+        var now = Date.now();
+        if (now - lastTouchEnd <= 300) {
+          e.preventDefault();
+        }
+        lastTouchEnd = now;
+      }, { passive: false });
+
+      document.addEventListener('gesturestart', function(e) {
+        e.preventDefault();
+      }, { passive: false });
+
+      render();
+
+      // PWA Manifest
+      var manifest = {
+        name: 'Kettlebells for Performance',
+        short_name: 'KB Performance',
+        description: '7 Protocolli Kettlebell',
+        start_url: '.',
+        display: 'standalone',
+        background_color: '#0c0c0e',
+        theme_color: '#0c0c0e',
+        orientation: 'portrait',
+        icons: [{
+          src: 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><rect fill="#0c0c0e" width="512" height="512" rx="64"/><path fill="#c9b370" d="M256 100L380 340H132L256 100Z"/><path fill="#c9b370" d="M256 160L196 280H316L256 160Z" opacity="0.5"/></svg>'),
+          sizes: '512x512',
+          type: 'image/svg+xml',
+          purpose: 'any maskable'
+        }]
+      };
+      
+      var manifestBlob = new Blob([JSON.stringify(manifest)], { type: 'application/json' });
+      var manifestUrl = URL.createObjectURL(manifestBlob);
+      var manifestLink = document.createElement('link');
+      manifestLink.rel = 'manifest';
+      manifestLink.href = manifestUrl;
+      document.head.appendChild(manifestLink);
+
+    })();
+  </script>
+</body>
+</html>
