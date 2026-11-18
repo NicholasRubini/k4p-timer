@@ -334,6 +334,11 @@ button.chip:active { background: var(--bg-input); }
 .ev-kg button { width: 40px; height: 40px; border-radius: 10px; background: var(--bg-elevated); font-size: 1.1rem; font-weight: 700; }
 .ev-kg b { min-width: 64px; text-align: center; font-family: var(--font-display); font-size: 1.2rem; }
 .ev-kg b small { font-size: .65rem; margin-left: 1px; }
+.ev-kg.sm { gap: 4px; margin-top: 6px; }
+.ev-kg.sm button { width: 36px; height: 36px; font-size: 1rem; }
+.ev-kg.sm b { min-width: 58px; font-size: 1rem; white-space: nowrap; }
+.ev-name > small { margin-top: 4px; }
+.ev-name .ev-kg small { display: inline; margin: 0 0 0 1px; font-size: .65rem; color: inherit; }
 .ev-in { width: 64px; height: 46px; text-align: center; font-family: var(--font-display); font-size: 1.4rem; font-weight: 700; background: var(--bg-input); border: 1px solid var(--line); border-radius: 10px; color: var(--text); }
 .ev-in:focus { outline: 2px solid var(--gold); outline-offset: 0; }
 .ev-pts { text-align: right; font-size: .82rem; font-weight: 700; color: var(--gold); }
@@ -593,7 +598,7 @@ const ICON_SRC = {
 //          statistiche · audio · motore del timer
 // ═══════════════════════════════════════════════════════════════
 
-const VERSION = '4.3';
+const VERSION = '4.4';
 
 // ───────── VENDITA ─────────
 const FREE_PROTOCOLS = ['yggdrasil', 'fenrir'];   // sempre gratuiti
@@ -1138,6 +1143,17 @@ function setEventReps(id, i, n, quiet) {
   s.pr = s.reps != null && validResult(s) && (s.prevBest == null || scoreOf(s) > s.prevBest);
   saveHistory();
   return quiet ? [] : syncAchievements(true);
+}
+/** Peso effettivo di una prova corretto nel riepilogo (passo −1/+1 nella scala dei pesi). */
+function setEventKg(id, i, step) {
+  const s = entryById(id); if (!s || !s.evKg || !(i >= 0 && i < s.evKg.length)) return [];
+  let j = EV_WEIGHTS.indexOf(s.evKg[i]);
+  if (j < 0) j = EV_WEIGHTS.findIndex((w) => w >= s.evKg[i]), j = j < 0 ? EV_WEIGHTS.length - 1 : j;
+  s.evKg[i] = EV_WEIGHTS[clamp(j + step, 0, EV_WEIGHTS.length - 1)];
+  s.kg = Math.max.apply(null, s.evKg);
+  s.pr = s.reps != null && validResult(s) && (s.prevBest == null || scoreOf(s) > s.prevBest);
+  saveHistory();
+  return syncAchievements(true);
 }
 const weekCount = () => { const lim = Date.now() - WEEK; return history.filter((h) => new Date(h.date).getTime() >= lim).length; };
 function streakWeeks() { // settimane consecutive (lun-dom) con almeno una sessione, inclusa quella corrente
@@ -1769,15 +1785,17 @@ function viewEventsDetail(p) {
 /** Riepilogo di una sessione a prove: ripetizioni per prova, punti e record. */
 function eventsPanel(s, p) {
   const outcome = eventsOutcome(s);
-  return html`<div class="panel ev-entry"><h4>Ripetizioni per prova${s.reps == null ? html` <span class="need">da inserire</span>` : ''}</h4>
+  return html`<div class="panel ev-entry"><h4>Peso e ripetizioni per prova${s.reps == null ? html` <span class="need">da inserire</span>` : ''}</h4>
     ${s.evKg.map((kg, i) => html`<div class="ev-row">
-      <div class="ev-name"><b>${i + 1}. ${p.ex ? p.ex[i] : 'Prova ' + (i + 1)}</b><small>2×${kg} kg${p.max ? ' · max ' + p.max[i] : ''}</small></div>
+      <div class="ev-name"><b>${i + 1}. ${p.ex ? p.ex[i] : 'Prova ' + (i + 1)}</b>
+        <div class="ev-kg sm"><button data-act="sumkg" data-i="${i}" data-v="-1" aria-label="Peso usato inferiore">−</button><b class="num">2×${kg}<small>kg</small></b><button data-act="sumkg" data-i="${i}" data-v="1" aria-label="Peso usato superiore">+</button></div>
+        ${p.max ? html`<small>max ${p.max[i]} rep</small>` : ''}</div>
       <input class="ev-in num" data-i="${i}" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="3" autocomplete="off" aria-label="Ripetizioni prova ${i + 1}" value="${s.evReps[i] == null ? '' : s.evReps[i]}" placeholder="—">
       <span class="ev-pts num" id="evPts${i}">${s.evReps[i] == null ? '' : fmtScore(s.evReps[i] * kg / 8)}</span>
     </div>`)}
     <div class="ev-total"><span>Punteggio</span><b class="num" id="evScore">${s.reps == null ? '—' : fmtScore(scoreOf(s))}</b></div>
     <p class="hint reps-out" id="repsOut">${outcome}</p>
-    <p class="hint">Oltre il massimo della prova le ripetizioni non danno punti: il valore viene limitato in automatico.</p></div>`;
+    <p class="hint">Se hai usato un peso diverso da quello impostato, correggilo con − e +. Oltre il massimo della prova le ripetizioni non danno punti: il valore viene limitato in automatico.</p></div>`;
 }
 function eventsOutcome(s) {
   if (s.reps == null) return '';
@@ -2255,6 +2273,13 @@ const ACT = {
     const p = byId[ui.pid]; if (!p || p.track !== 'events') return;
     const a = evKgFor(p), i = +el.dataset.i, j = clamp(EV_WEIGHTS.indexOf(a[i]) + +el.dataset.v, 0, EV_WEIGHTS.length - 1);
     a[i] = EV_WEIGHTS[j]; evKgMap[p.id] = a; store.set('kb2_evkg', evKgMap); rerender();
+  },
+  sumkg(el) {
+    const s = entryById(ui.summaryId); if (!s || !s.evKg || ui.view !== 'summary') return;
+    const fresh = setEventKg(ui.summaryId, +el.dataset.i, +el.dataset.v > 0 ? 1 : -1);
+    if (ui.summaryFrom !== 'history' && history[0] === s) { evKgMap[s.pid] = s.evKg.slice(); store.set('kb2_evkg', evKgMap); } // la prossima volta parte dai pesi davvero usati
+    if (fresh.length && ui.summaryFrom !== 'history') ui.newAch = (ui.newAch || []).concat(fresh);
+    rerender();
   },
   vol(el) { volMap[ui.pid] = +el.dataset.v; store.set('kb2_vol', volMap); rerender(); },
   ex(el) { if (exMap[ui.pid] === el.dataset.v) delete exMap[ui.pid]; else exMap[ui.pid] = el.dataset.v; store.set('kb2_ex', exMap); rerender(); },
