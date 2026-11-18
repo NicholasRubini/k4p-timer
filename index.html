@@ -56,10 +56,10 @@
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; -webkit-touch-callout: none; }
-html { height: 100%; overflow: hidden; }
+html { min-height: 100%; background: var(--bg); }
 body {
   font-family: var(--font-body); background: var(--bg); color: var(--text);
-  height: 100%; line-height: 1.5; position: fixed; width: 100%; overflow: hidden;
+  min-height: 100%; line-height: 1.5; overflow-x: hidden;
   -webkit-font-smoothing: antialiased; -webkit-text-size-adjust: 100%;
   font-variant-numeric: lining-nums; overscroll-behavior: none;
   touch-action: manipulation; user-select: none; -webkit-user-select: none;
@@ -71,13 +71,17 @@ textarea, input, select { font: inherit; color: inherit; user-select: text; -web
 .num { font-variant-numeric: lining-nums tabular-nums; }
 
 #app {
-  height: 100%; overflow-y: auto; overflow-x: hidden; -webkit-overflow-scrolling: touch;
-  overscroll-behavior-y: contain; padding: var(--safe-top) var(--safe-right) 0 var(--safe-left);
+  min-height: 100vh; min-height: 100dvh;
+  padding: var(--safe-top) var(--safe-right) 0 var(--safe-left);
 }
+/* copre la barra di stato mentre la pagina scorre sotto */
+body::before { content: ''; position: fixed; top: 0; left: 0; right: 0; height: var(--safe-top); background: var(--bg); z-index: 60; pointer-events: none; }
+/* la barra «Indietro» resta sempre raggiungibile */
+#app > .wrap > .topbar:first-child { position: sticky; top: var(--safe-top); z-index: 30; background: var(--bg); }
 #app.with-tabbar { padding-bottom: calc(var(--tabbar-h) + var(--safe-bottom)); }
-#app > * { animation: view-in .32s var(--ease); }
+#app > * { animation: view-in .18s var(--ease); }
 #app > .timer { animation: none; }
-@keyframes view-in { from { opacity: 0; transform: translateY(10px); } }
+@keyframes view-in { from { opacity: .4; transform: translateY(6px); } }
 .wrap { max-width: 620px; margin: 0 auto; }
 
 .flash-overlay { position: fixed; inset: 0; pointer-events: none; z-index: 9999; opacity: 0; transition: opacity .4s ease-out; }
@@ -265,7 +269,7 @@ button.chip:active { background: var(--bg-input); }
 .sticky-cta .btn { max-width: 588px; margin: 0 auto; }
 
 /* ───────── Timer ───────── */
-.timer { --phase: var(--prep); min-height: 100%; display: flex; flex-direction: column; align-items: center; padding: 0 16px calc(12px + var(--safe-bottom));
+.timer { --phase: var(--prep); min-height: calc(100vh - var(--safe-top)); min-height: calc(100dvh - var(--safe-top)); display: flex; flex-direction: column; align-items: center; padding: 0 16px calc(12px + var(--safe-bottom));
   background: radial-gradient(120% 70% at 50% 30%, color-mix(in srgb, var(--phase) 17%, transparent), transparent 70%); transition: background .4s; }
 .timer.ph-work { --phase: var(--work); }
 .timer.ph-rest { --phase: var(--rest); }
@@ -448,7 +452,7 @@ select { background: var(--bg-input); border: none; border-radius: 8px; padding:
 .code-input:focus { outline: none; border-color: var(--gold-dim); }
 .code-err { font-size: .76rem; color: var(--danger); margin-top: 8px; min-height: 1.2em; text-align: center; font-weight: 600; }
 
-.welcome { min-height: 100%; display: flex; flex-direction: column; padding: 0 22px calc(22px + var(--safe-bottom)); max-width: 520px; margin: 0 auto;
+.welcome { min-height: calc(100vh - var(--safe-top)); min-height: calc(100dvh - var(--safe-top)); display: flex; flex-direction: column; padding: 0 22px calc(22px + var(--safe-bottom)); max-width: 520px; margin: 0 auto;
   background: radial-gradient(90% 46% at 50% 16%, rgba(201,179,112,.16), transparent 70%); }
 .w-dots { display: flex; gap: 6px; justify-content: center; padding: 18px 0 0; }
 .w-dots i { width: 22px; height: 3px; border-radius: 2px; background: var(--bg-elevated); transition: background .3s; }
@@ -565,7 +569,7 @@ const ICON_SRC = {
 //          statistiche · audio · motore del timer
 // ═══════════════════════════════════════════════════════════════
 
-const VERSION = '4.0';
+const VERSION = '4.1';
 
 // ───────── VENDITA ─────────
 const FREE_PROTOCOLS = ['yggdrasil', 'fenrir'];   // sempre gratuiti
@@ -1066,6 +1070,7 @@ let voiceSrc = [];               // clip vocali in coda
 function audio() {
   if (actx && actx.state === 'closed') { actx = null; master = null; }
   if (!actx) {
+    setSessionType();
     try { actx = new (window.AudioContext || window.webkitAudioContext)(); master = actx.createGain(); master.connect(actx.destination); } catch (e) { return null; }
   }
   // iOS usa anche lo stato 'interrupted' (chiamate, notifiche, blocco schermo): va ripreso come 'suspended'
@@ -1104,7 +1109,7 @@ function cancelScheduled() {
   scheduled.forEach((x) => { try { x.node.stop(); } catch (e) {} });
   scheduled.length = 0; voiceSrc = [];
   pendingTimers.forEach(clearTimeout); pendingTimers.clear();
-  if (hasTTS) try { speechSynthesis.cancel(); } catch (e) {}
+  ttsCancel();
 }
 function tone(freq, dur, type, delay, vol) {
   const c = audio(); if (!c) return;
@@ -1145,6 +1150,7 @@ function decodeClips() {
   });
 }
 const hasTTS = 'speechSynthesis' in window;
+function ttsCancel() { if (hasTTS) try { if (speechSynthesis.speaking || speechSynthesis.pending) speechSynthesis.cancel(); } catch (e) {} }
 let voices = [];
 function loadVoices() { if (hasTTS) try { voices = speechSynthesis.getVoices().filter((v) => /^it/i.test(v.lang)); } catch (e) {} }
 const useClips = () => settings.voiceMode !== 'tts';
@@ -1157,10 +1163,11 @@ const voiceOn = () => settings.voice && !settings.muted && (hasTTS || (useClips(
 function say(text, keys, opt) {
   const delay = (opt && opt.delay) || 0, gap = opt && opt.gap != null ? opt.gap : 0.06;
   if (!voiceOn() || !text) return;
-  if (useClips() && keys) {
+  if (useClips() && keys && [].concat(keys).every((k) => CLIPS[k])) {
     const ks = [].concat(keys);
     const c = ks.every((k) => clipBuf[k]) ? audio() : null;
-    if (c) {
+    if (!c) return; // clip non ancora pronta: meglio saltare un annuncio che passare alla voce sintetica
+    {
       let t = c.currentTime + 0.005 + delay;
       voiceSrc = voiceSrc.filter((v) => { if (v.start < t) { try { v.s.stop(t); } catch (e) {} return false; } return true; }); // la nuova frase tronca la precedente
       ks.forEach((k) => {
@@ -1185,23 +1192,26 @@ function say(text, keys, opt) {
 }
 function hush() {
   voiceSrc.forEach((v) => { try { v.s.stop(); } catch (e) {} }); voiceSrc = [];
-  if (hasTTS) try { speechSynthesis.cancel(); } catch (e) {}
+  ttsCancel();
 }
 function applyAudioSession() {
   // Safari iOS 17+: 'ambient' si mescola alla musica di altre app (ma rispetta l'interruttore silenzioso);
   // 'playback' suona anche in silenzioso ma mette in pausa Spotify, YouTube ecc.
   try {
-    const want = settings.audioMode === 'silent' ? 'playback' : 'ambient';
-    if (navigator.audioSession && navigator.audioSession.type !== want) {
-      navigator.audioSession.type = want;
-      if (actx) resetAudio(); // il nuovo tipo di sessione vale solo per un contesto audio nuovo
-    }
+    if (setSessionType() && actx) resetAudio(); // il nuovo tipo di sessione vale solo per un contesto audio nuovo
   } catch (e) {}
+}
+function setSessionType() {
+  try {
+    const want = settings.audioMode === 'silent' ? 'playback' : 'ambient';
+    if (navigator.audioSession && navigator.audioSession.type !== want) { navigator.audioSession.type = want; return true; }
+  } catch (e) {}
+  return false;
 }
 function unlock() {
   applyAudioSession(); primeAudio();
   // la voce sintetica va «sbloccata» solo se serve: su iPhone può prendersi la sessione audio e zittire il resto
-  if (hasTTS && (!useClips() || !Object.keys(clipBuf).length)) try { const u = new SpeechSynthesisUtterance(' '); u.volume = 0; speechSynthesis.speak(u); } catch (e) {}
+  if (hasTTS && (!useClips() || !Object.keys(CLIPS).length)) try { const u = new SpeechSynthesisUtterance(' '); u.volume = 0; speechSynthesis.speak(u); } catch (e) {}
 }
 const buzz = (p) => { if (settings.haptics) try { navigator.vibrate && navigator.vibrate(p); } catch (e) {} };
 let flashT = null;
@@ -1279,7 +1289,7 @@ function startWorkout(pid) {
   };
   ui.view = 'timer';
   meta.focusHint = (meta.focusHint || 0) + (meta.focusHint >= 3 ? 0 : 1); saveMeta(); // suggerimento «schermo grande» solo le prime volte
-  pushNav(); render(); app.scrollTop = 0; lockScreen(); startLoops(); tick();
+  pushNav(); render(); window.scrollTo(0, 0); lockScreen(); startLoops(); tick();
 }
 function startLoops() {
   stopLoops();
@@ -1459,10 +1469,10 @@ function go(view, pid) {
   ui.prevView = ui.view; ui.view = view;
   if (!TAB_VIEWS[view]) pushNav();
   render();
-  app.scrollTop = 0;
+  window.scrollTo(0, 0);
 }
 function pushNav() { try { window.history.pushState({ v: ui.view }, ''); } catch (e) {} }
-function rerender() { const y = app.scrollTop; render(); app.scrollTop = y; }
+function rerender() { const y = window.scrollY; render(); window.scrollTo(0, y); }
 window.addEventListener('popstate', () => {
   if (ui.modal) { closeModal(true); pushNav(); return; }
   if (ui.view === 'timer' && R.active) { confirmExit(); pushNav(); return; }
@@ -2197,6 +2207,7 @@ $('#importFile').addEventListener('change', (e) => { const f = e.target.files[0]
 // ═══════════════════════════════════════════════════════════════
 (async function boot() {
   loadState();
+  applyAudioSession(); // prima di qualsiasi suono: su iPhone la musica di altre app continua
   await unlockAtBoot();
   history = loadHistory();
   syncAchievements(false); // i traguardi già raggiunti non vengono annunciati di nuovo
